@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AppleLogo } from "../icons/AppIcons";
+import { PoopLogo } from "../icons/AppIcons";
 import { useWindows } from "../state/windows";
 import { apps } from "../apps/apps.config";
 
@@ -14,6 +14,48 @@ function useClock() {
 
 const fmtDate = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric" });
 const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" });
+
+/* Clean, symmetric status glyphs — all drawn on the same 16×16 grid, stroke-based */
+function WifiGlyph() {
+  return (
+    <svg viewBox="0 0 16 16" className="h-[15px] w-[15px]" fill="none" stroke="currentColor" strokeLinecap="round" aria-label="wifi">
+      <path d="M1.5 6.2 a10 10 0 0 1 13 0" strokeWidth="1.6" />
+      <path d="M3.9 8.9 a6.5 6.5 0 0 1 8.2 0" strokeWidth="1.6" />
+      <path d="M6.3 11.5 a3.2 3.2 0 0 1 3.4 0" strokeWidth="1.6" />
+      <circle cx="8" cy="13.4" r="1.15" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function SearchGlyph() {
+  return (
+    <svg viewBox="0 0 16 16" className="h-[15px] w-[15px]" fill="none" stroke="currentColor" strokeLinecap="round" aria-label="search">
+      <circle cx="7" cy="7" r="4.6" strokeWidth="1.6" />
+      <path d="M10.6 10.6 L14 14" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
+function ControlCenterGlyph() {
+  return (
+    <svg viewBox="0 0 16 16" className="h-[15px] w-[15px]" fill="none" stroke="currentColor" aria-label="control center">
+      <rect x="1.2" y="2.6" width="13.6" height="4.6" rx="2.3" strokeWidth="1.5" />
+      <circle cx="4.9" cy="4.9" r="1.4" fill="currentColor" stroke="none" />
+      <rect x="1.2" y="8.8" width="13.6" height="4.6" rx="2.3" strokeWidth="1.5" />
+      <circle cx="11.1" cy="11.1" r="1.4" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function BatteryGlyph() {
+  return (
+    <svg viewBox="0 0 28 14" className="h-[13px] w-[26px]" aria-label="battery">
+      <rect x="0.75" y="0.75" width="22.5" height="12.5" rx="3.75" fill="none" stroke="currentColor" strokeOpacity="0.55" strokeWidth="1.5" />
+      <rect x="2.5" y="2.5" width="15.5" height="9" rx="2" fill="currentColor" />
+      <path d="M25.5 4.6 v4.8 c1.5 -0.45 2.2 -1.3 2.2 -2.4 s-0.7 -1.95 -2.2 -2.4Z" fill="currentColor" fillOpacity="0.55" />
+    </svg>
+  );
+}
 
 export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onRestart: () => void }) {
   const now = useClock();
@@ -48,13 +90,13 @@ export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onR
   );
 
   return (
-    <div className="relative z-[9000] flex h-7 items-center gap-1 px-3 text-[13px] font-medium text-white/95 [text-shadow:0_1px_2px_rgba(0,0,0,0.35)]">
+    <div className="relative z-[9000] flex h-7 items-center px-3 text-[13px] font-medium text-white/95 [text-shadow:0_1px_2px_rgba(0,0,0,0.35)]">
       <div ref={menuRef} className="relative">
         <button
           className={`rounded px-2 py-0.5 ${appleOpen ? "bg-white/20" : "hover:bg-white/10"}`}
           onClick={() => setAppleOpen((v) => !v)}
         >
-          <AppleLogo className="h-4 w-4" />
+          <PoopLogo className="h-4 w-4" />
         </button>
         {appleOpen && (
           <div className="menu-in glass absolute left-0 top-8 w-56 rounded-xl p-1">
@@ -68,24 +110,22 @@ export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onR
           </div>
         )}
       </div>
-      <span className="px-2 font-bold">{appName}</span>
+      <span className="max-w-36 truncate whitespace-nowrap px-2 font-bold">{appName}</span>
       {["File", "Edit", "View", "Go", "Window", "Help"].map((m) => (
         <span key={m} className="hidden cursor-default rounded px-2 py-0.5 hover:bg-white/10 md:inline">
           {m}
         </span>
       ))}
       <div className="flex-1" />
-      {/* status glyphs */}
-      <svg viewBox="0 0 24 24" className="mx-1 h-4 w-4" fill="currentColor" aria-label="wifi">
-        <path d="M12 18.5a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm0-5.2c-2.1 0-4 .8-5.4 2.2l1.8 1.8a5.2 5.2 0 0 1 7.2 0l1.8-1.8A7.6 7.6 0 0 0 12 13.3Zm0-5.1c-3.5 0-6.7 1.4-9 3.6l1.8 1.8A10.2 10.2 0 0 1 12 10.7c2.8 0 5.4 1.1 7.2 2.9l1.8-1.8a12.7 12.7 0 0 0-9-3.6Z" />
-      </svg>
-      <svg viewBox="0 0 30 14" className="mx-1 h-3.5 w-8" aria-label="battery">
-        <rect x="0.5" y="0.5" width="25" height="13" rx="3.5" fill="none" stroke="currentColor" strokeOpacity="0.6" />
-        <rect x="2" y="2" width="19" height="10" rx="2" fill="currentColor" />
-        <path d="M27.5 4.5v5c1.4-.4 2.2-1.3 2.2-2.5s-.8-2.1-2.2-2.5Z" fill="currentColor" fillOpacity="0.6" />
-      </svg>
-      <span className="ml-1">{fmtDate.format(now)}</span>
-      <span className="ml-2 tabular-nums">{fmtTime.format(now)}</span>
+      {/* status area — even rhythm, uniform glyph grid */}
+      <div className="flex items-center gap-1">
+        <span className="grid h-6 w-7 place-items-center rounded hover:bg-white/10"><BatteryGlyph /></span>
+        <span className="grid h-6 w-7 place-items-center rounded hover:bg-white/10"><WifiGlyph /></span>
+        <span className="grid h-6 w-7 place-items-center rounded hover:bg-white/10"><SearchGlyph /></span>
+        <span className="grid h-6 w-7 place-items-center rounded hover:bg-white/10"><ControlCenterGlyph /></span>
+      </div>
+      <span className="ml-2 hidden whitespace-nowrap sm:inline">{fmtDate.format(now)}</span>
+      <span className="ml-2 whitespace-nowrap tabular-nums">{fmtTime.format(now)}</span>
     </div>
   );
 }

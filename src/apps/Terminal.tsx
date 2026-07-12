@@ -44,6 +44,42 @@ export default function Terminal() {
 
   const promptStr = `jack@macbook ${cwd.length ? "~/" + cwd.join("/") : "~"} %`;
 
+  const COMMANDS = ["ls", "cd", "cat", "pwd", "open", "clear", "help", "whoami", "date", "echo", "neofetch"];
+  const APPS = ["about", "chrome", "music", "settings", "terminal", "github", "linkedin"];
+
+  /** Tab-completion: first word → commands; `open` → app names; otherwise → entries in cwd. */
+  function complete(raw: string): string | null {
+    const parts = raw.split(/\s+/);
+    const last = parts[parts.length - 1] ?? "";
+    let pool: string[];
+    if (parts.length <= 1) pool = COMMANDS;
+    else if (parts[0] === "open") pool = APPS;
+    else {
+      const node = resolve(cwd, HOME);
+      if (!node || typeof node === "string") return null;
+      pool = Object.keys(node).map((n) => (typeof node[n] === "string" ? n : n + "/"));
+    }
+    const matches = pool.filter((p) => p.startsWith(last));
+    if (matches.length === 1) {
+      parts[parts.length - 1] = matches[0];
+      return parts.join(" ") + (matches[0].endsWith("/") ? "" : " ");
+    }
+    if (matches.length > 1) {
+      setLines((l) => [...l, { prompt: promptStr, text: raw }, { text: matches.join("   ") }]);
+      // extend to the longest common prefix
+      let prefix = matches[0];
+      for (const m of matches) {
+        while (!m.startsWith(prefix)) prefix = prefix.slice(0, -1);
+      }
+      if (prefix.length > last.length) {
+        parts[parts.length - 1] = prefix;
+        return parts.join(" ");
+      }
+      return raw;
+    }
+    return null;
+  }
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView();
   }, [lines]);
@@ -160,6 +196,10 @@ export default function Terminal() {
             if (e.key === "Enter") {
               run(input);
               setInput("");
+            } else if (e.key === "Tab") {
+              e.preventDefault();
+              const completed = complete(input);
+              if (completed !== null) setInput(completed);
             } else if (e.key === "ArrowUp") {
               e.preventDefault();
               const idx = Math.min(histIdx + 1, history.length - 1);
