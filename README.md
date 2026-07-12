@@ -16,4 +16,4 @@ Vite · React 18 · TypeScript · Tailwind CSS · zustand · react-rnd. Deployed
 
 ## Credits
 
-Concept inspired by [vivek9patel's Ubuntu portfolio](https://github.com/vivek9patel/vivek9patel.github.io) (MIT). UI is an original, hand-drawn homage to macOS Tahoe — no Apple assets are used.
+Concept inspired by [vivek9patel's Ubuntu portfolio](https://github.com/vivek9patel/vivek9patel.github.io) (MIT). App icons adapted from [aakashsharma003/macOS-Portfolio](https://github.com/aakashsharma003/macOS-Portfolio) (MIT). UI is an original homage to macOS Tahoe — no Apple assets are used.

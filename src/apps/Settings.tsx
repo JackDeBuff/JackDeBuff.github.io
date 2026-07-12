@@ -13,7 +13,7 @@ export default function Settings() {
 
   return (
     <div className="flex h-full bg-zinc-100/95 text-zinc-900 dark:bg-zinc-900/95 dark:text-zinc-100">
-      <aside className="glass-thin w-52 shrink-0 space-y-0.5 overflow-y-auto p-2">
+      <aside className="glass-thin w-36 shrink-0 space-y-0.5 overflow-y-auto p-2 md:w-52">
         {PANES.map((p) => (
           <button
             key={p}
@@ -30,11 +30,11 @@ export default function Settings() {
         ))}
       </aside>
 
-      <main className="min-w-0 flex-1 overflow-y-auto p-6">
+      <main className="min-w-0 flex-1 overflow-y-auto p-4 md:p-6">
         {pane === "Appearance" && (
           <div>
             <h1 className="mb-4 text-lg font-bold">Appearance</h1>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               {(["dark", "light"] as Appearance[]).map((a) => (
                 <button
                   key={a}
@@ -64,7 +64,7 @@ export default function Settings() {
         {pane === "Wallpaper" && (
           <div>
             <h1 className="mb-4 text-lg font-bold">Wallpaper</h1>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {WALLPAPERS.map((w) => (
                 <button
                   key={w.id}
@@ -106,6 +106,10 @@ export default function Settings() {
               Built with React + Tailwind. UI inspired by macOS Tahoe (no Apple assets used) and{" "}
               <a className="text-sky-600 hover:underline dark:text-sky-400" href="https://github.com/vivek9patel/vivek9patel.github.io" target="_blank" rel="noopener">
                 vivek9patel's Ubuntu portfolio
+              </a>{" "}
+              (MIT). App icons adapted from{" "}
+              <a className="text-sky-600 hover:underline dark:text-sky-400" href="https://github.com/aakashsharma003/macOS-Portfolio" target="_blank" rel="noopener">
+                aakashsharma003/macOS-Portfolio
               </a>{" "}
               (MIT).
             </p>

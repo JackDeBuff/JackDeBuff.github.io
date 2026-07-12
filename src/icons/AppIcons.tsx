@@ -1,9 +1,28 @@
 import type { ReactNode } from "react";
+import finderIcon from "./app-icons/finder.webp";
+import terminalIcon from "./app-icons/terminal.webp";
+import settingsIcon from "./app-icons/settings.webp";
+import photosIcon from "./app-icons/photos.webp";
 
 /**
- * Hand-drawn macOS-style icons (no Apple assets).
+ * App icons: real macOS-style icon images (downscaled WebP, adapted from the
+ * MIT-licensed aakashsharma003/macOS-Portfolio repo) plus a few hand-drawn
+ * SVG tiles. The PoopLogo system mark is Jack's own — never an Apple asset.
  * Squircle tiles use a superellipse-ish radius with layered glass shine.
  */
+
+/** Renders a bitmap app icon. The source PNGs bake in their own squircle
+ *  padding + drop shadow, so `scale-[1.08]` optically matches the SVG tiles. */
+function AppIconImg({ src, alt }: { src: string; alt: string }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="h-full w-full scale-[1.08] object-contain"
+      draggable={false}
+    />
+  );
+}
 
 function Squircle({
   children,
@@ -53,38 +72,9 @@ function Squircle({
   );
 }
 
-/** Modern macOS-style folder for "About Jack" (standalone folder glyph, like a real Finder folder). */
+/** "About Jack" — Finder mark. */
 export function AboutIcon() {
-  return (
-    <svg viewBox="0 0 100 100" className="h-full w-full">
-      <defs>
-        <linearGradient id="fold-back" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#3E9BF4" />
-          <stop offset="1" stopColor="#1D6FDB" />
-        </linearGradient>
-        <linearGradient id="fold-front" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#7CC2FB" />
-          <stop offset="1" stopColor="#3D8FEF" />
-        </linearGradient>
-        <filter id="fold-ds" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2.5" stdDeviation="3" floodColor="#000" floodOpacity="0.35" />
-        </filter>
-      </defs>
-      <g filter="url(#fold-ds)">
-        {/* back panel with tab */}
-        <path
-          d="M8 34 q0 -8 8 -8 h20 q4 0 6.5 3 l4.5 5.5 h37 q8 0 8 8 v3 H8 Z"
-          fill="url(#fold-back)"
-        />
-        {/* front body */}
-        <rect x="8" y="40" width="84" height="42" rx="9" fill="url(#fold-front)" />
-        <rect x="8" y="40" width="84" height="10" rx="5" fill="#fff" opacity="0.18" />
-        {/* face — a friendly hint that it's about a person */}
-        <circle cx="50" cy="57" r="6.5" fill="#fff" opacity="0.95" />
-        <path d="M38 76 c0-8 7-11 12-11 s12 3 12 11 Z" fill="#fff" opacity="0.95" />
-      </g>
-    </svg>
-  );
+  return <AppIconImg src={finderIcon} alt="About Jack" />;
 }
 
 export function ChromeIcon() {
@@ -103,35 +93,25 @@ export function ChromeIcon() {
 }
 
 export function TerminalIcon() {
-  return (
-    <Squircle id="term" gradient={["#3f3f46", "#101013"]}>
-      <text x="22" y="52" fontFamily="ui-monospace, Menlo, monospace" fontSize="28" fontWeight="700" fill="#34d399">
-        &gt;
-      </text>
-      <rect x="42" y="46" width="22" height="6" rx="2" fill="#e4e4e7" />
-    </Squircle>
-  );
+  return <AppIconImg src={terminalIcon} alt="Terminal" />;
 }
 
 export function SettingsIcon() {
-  return (
-    <Squircle id="cfg" gradient={["#e5e7eb", "#9ca3af"]}>
-      <g transform="translate(50 50)" fill="#52525b">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <rect key={i} x="-5" y="-31" width="10" height="13" rx="3" transform={`rotate(${i * 45})`} />
-        ))}
-        <circle r="21" fill="#52525b" />
-        <circle r="9.5" fill="#d4d4d8" />
-      </g>
-    </Squircle>
-  );
+  return <AppIconImg src={settingsIcon} alt="System Settings" />;
 }
 
+export function PhotosIcon() {
+  return <AppIconImg src={photosIcon} alt="Photos" />;
+}
+
+/** YouTube Music — official mark: light squircle tile, red disc with a thin
+ *  white ring inside, and a white play triangle nudged optically right. */
 export function MusicIcon() {
   return (
-    <Squircle id="ytm" gradient={["#2b2b2e", "#0f0f10"]}>
-      <circle cx="50" cy="50" r="28" fill="none" stroke="#FF0033" strokeWidth="6.5" />
-      <path d="M43 37 L67 50 L43 63 Z" fill="#FF0033" />
+    <Squircle id="ytm" gradient={["#ffffff", "#f1f1f2"]}>
+      <circle cx="50" cy="50" r="30" fill="#FF0000" />
+      <circle cx="50" cy="50" r="20" fill="none" stroke="#fff" strokeWidth="4" />
+      <path d="M45 40 L64 50 L45 60 Z" fill="#fff" />
     </Squircle>
   );
 }

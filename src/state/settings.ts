@@ -36,7 +36,7 @@ interface SettingsState {
 export const useSettings = create<SettingsState>()(
   persist(
     (set) => ({
-      wallpaper: "tahoe-night",
+      wallpaper: "sequoia-dusk",
       appearance: "dark",
       setWallpaper: (wallpaper) => set({ wallpaper }),
       setAppearance: (appearance) => set({ appearance }),

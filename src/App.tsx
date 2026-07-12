@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import BootScreen from "./os/BootScreen";
 import LockScreen from "./os/LockScreen";
 import Desktop from "./os/Desktop";
+import MobileShell from "./mobile/MobileShell";
 import { useSettings } from "./state/settings";
+import { useIsMobile } from "./state/useIsMobile";
 
 type Stage = "boot" | "lock" | "desktop";
 
 export default function App() {
   const [stage, setStage] = useState<Stage>("boot");
   const appearance = useSettings((s) => s.appearance);
+  const mobile = useIsMobile();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -29,9 +32,12 @@ export default function App() {
 
       {stage === "boot" && <BootScreen onDone={() => setStage("lock")} />}
       {stage === "lock" && <LockScreen onUnlock={() => setStage("desktop")} />}
-      {stage === "desktop" && (
-        <Desktop onLock={() => setStage("lock")} onRestart={() => setStage("boot")} />
-      )}
+      {stage === "desktop" &&
+        (mobile ? (
+          <MobileShell onLock={() => setStage("lock")} />
+        ) : (
+          <Desktop onLock={() => setStage("lock")} onRestart={() => setStage("boot")} />
+        ))}
     </div>
   );
 }

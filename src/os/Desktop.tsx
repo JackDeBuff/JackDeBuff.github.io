@@ -5,12 +5,10 @@ import WindowFrame from "./Window";
 import { apps } from "../apps/apps.config";
 import { useWindows } from "../state/windows";
 import { useSettings, wallpaperUrl } from "../state/settings";
-import { useIsMobile } from "../state/useIsMobile";
 
 export default function Desktop({ onLock, onRestart }: { onLock: () => void; onRestart: () => void }) {
   const { openWindow } = useWindows();
   const wallpaper = useSettings((s) => s.wallpaper);
-  const mobile = useIsMobile();
 
   return (
     <div
@@ -44,7 +42,7 @@ export default function Desktop({ onLock, onRestart }: { onLock: () => void; onR
             const AppView = a.component!;
             return (
               <WindowFrame
-                key={`${a.id}-${mobile ? "m" : "d"}`}
+                key={a.id}
                 id={a.id}
                 title={a.title}
                 defaultSize={a.defaultSize!}

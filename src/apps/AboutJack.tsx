@@ -25,7 +25,7 @@ export default function AboutJack() {
   return (
     <div className="flex h-full bg-zinc-100/95 text-zinc-900 dark:bg-zinc-900/95 dark:text-zinc-100">
       {/* Finder-style glass sidebar */}
-      <aside className="glass-thin w-48 shrink-0 space-y-0.5 overflow-y-auto p-2">
+      <aside className="glass-thin w-36 shrink-0 space-y-0.5 overflow-y-auto p-2 md:w-48">
         {SECTIONS.map((s) => (
           <button
             key={s}
@@ -42,7 +42,7 @@ export default function AboutJack() {
         ))}
       </aside>
 
-      <main className={`min-w-0 flex-1 ${section === "Resume" ? "" : "overflow-y-auto p-6"}`}>
+      <main className={`min-w-0 flex-1 ${section === "Resume" ? "" : "overflow-y-auto p-4 md:p-6"}`}>
         {section === "About" && (
           <div className="space-y-4">
             <div className="flex items-center gap-4">

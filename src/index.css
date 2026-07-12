@@ -16,21 +16,98 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* ==========================================================================
+   Design tokens — Liquid Glass (macOS Tahoe)
+   The app defaults to DARK, so :root holds the dark family and `.light`
+   overrides every token. Values adapted from Tahoe liquid-glass conventions:
+   dark ≈ rgba(28,28,32,…) surfaces with white hairlines,
+   light ≈ white / frosted glass with black hairlines.
+   ========================================================================== */
+:root {
+  /* Surfaces (translucent fills, pair with a blur stack) */
+  --lg-bg-clear: rgba(255, 255, 255, 0.06);
+  --lg-bg-tinted: rgba(28, 28, 32, 0.42);
+  --lg-bg-solid: rgba(28, 28, 32, 0.92);
+  --lg-bg-dock: rgba(28, 28, 32, 0.44);
+  --lg-bg-menu: rgba(30, 30, 34, 0.62);
+
+  /* Blur stacks (for backdrop-filter) */
+  --lg-blur: blur(40px) saturate(1.8);
+  --lg-blur-heavy: blur(80px) saturate(2);
+  --lg-blur-light: blur(20px) saturate(1.6);
+  --lg-blur-menu: blur(60px) saturate(2.2);
+
+  /* Edges — full border shorthand values + inset highlight box-shadows */
+  --lg-border: 0.5px solid rgba(255, 255, 255, 0.14);
+  --lg-border-strong: 0.5px solid rgba(255, 255, 255, 0.24);
+  --lg-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  --lg-inner-highlight-strong: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  /* Shadows */
+  --shadow-window: 0 22px 70px rgba(0, 0, 0, 0.55);
+  --shadow-window-inactive: 0 10px 34px rgba(0, 0, 0, 0.35);
+  --shadow-menu: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --shadow-dock: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-tooltip: 0 6px 20px rgba(0, 0, 0, 0.45);
+
+  /* Radii */
+  --radius-window: 14px;
+  --radius-menu: 16px;
+  --radius-dock: 22px;
+  --radius-tooltip: 10px;
+
+  /* Native-feel easings */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.3, 0.42, 1);
+  --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.light {
+  /* Surfaces */
+  --lg-bg-clear: rgba(255, 255, 255, 0.38);
+  --lg-bg-tinted: rgba(246, 246, 250, 0.55);
+  --lg-bg-solid: rgba(250, 250, 252, 0.94);
+  --lg-bg-dock: rgba(255, 255, 255, 0.55);
+  --lg-bg-menu: rgba(250, 250, 252, 0.72);
+
+  /* Blur stacks (unchanged geometry, but tokenized for overrides) */
+  --lg-blur: blur(40px) saturate(1.8);
+  --lg-blur-heavy: blur(80px) saturate(2);
+  --lg-blur-light: blur(20px) saturate(1.6);
+  --lg-blur-menu: blur(60px) saturate(2.2);
+
+  /* Edges */
+  --lg-border: 0.5px solid rgba(0, 0, 0, 0.08);
+  --lg-border-strong: 0.5px solid rgba(0, 0, 0, 0.14);
+  --lg-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --lg-inner-highlight-strong: inset 0 1px 0 rgba(255, 255, 255, 1);
+
+  /* Shadows (lighter in light mode) */
+  --shadow-window: 0 22px 60px rgba(0, 0, 0, 0.22);
+  --shadow-window-inactive: 0 10px 30px rgba(0, 0, 0, 0.14);
+  --shadow-menu: 0 12px 36px rgba(0, 0, 0, 0.18);
+  --shadow-dock: 0 12px 36px rgba(0, 0, 0, 0.18);
+  --shadow-tooltip: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
 @layer components {
   /*
    * Liquid Glass — adapted from the open-source pure-CSS/SVG technique
    * (turbulence displacement + layered inset highlights), tuned for Tahoe.
    * The displacement filter (#lg-distortion) is defined in App.tsx.
+   * The layered specular inset highlights are deliberate and preserved as-is;
+   * reusable pieces (surface fill, outer depth) read from tokens.
    */
   .liquid-glass {
     position: relative;
     isolation: isolate;
     backdrop-filter: blur(6px) saturate(1.7) brightness(1.06);
     -webkit-backdrop-filter: blur(6px) saturate(1.7) brightness(1.06);
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--lg-bg-clear);
     box-shadow:
       /* soft outer depth */
-      0 10px 30px rgba(0, 0, 0, 0.35),
+      var(--shadow-window-inactive),
       /* hairline rim */
       inset 0 0 0 1px rgba(255, 255, 255, 0.14),
       /* specular top-left edge */
@@ -48,9 +125,9 @@ body {
     }
   }
   .light .liquid-glass {
-    background: rgba(255, 255, 255, 0.38);
+    background: var(--lg-bg-clear);
     box-shadow:
-      0 10px 30px rgba(0, 0, 0, 0.16),
+      var(--shadow-window-inactive),
       inset 0 0 0 1px rgba(255, 255, 255, 0.55),
       inset 1.5px 2.5px 0 -1px rgba(255, 255, 255, 0.95),
       inset -1.5px -1.5px 0 -1px rgba(255, 255, 255, 0.6),
@@ -64,29 +141,99 @@ body {
     -webkit-backdrop-filter: blur(24px) saturate(1.8);
     background:
       linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02) 55%),
-      rgba(28, 28, 32, 0.42);
+      var(--lg-bg-tinted);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      var(--lg-inner-highlight),
       inset 0 0 0 1px rgba(255, 255, 255, 0.06);
   }
   .light .glass,
   .light .glass-thin {
     background:
       linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35) 55%),
-      rgba(246, 246, 250, 0.55);
+      var(--lg-bg-tinted);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      var(--lg-inner-highlight),
       inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Menu / dropdown / popover surface — heavier menu blur + soft top edge */
+  .glass-menu {
+    backdrop-filter: var(--lg-blur-menu);
+    -webkit-backdrop-filter: var(--lg-blur-menu);
+    background: var(--lg-bg-menu);
+    border: var(--lg-border-strong);
+    border-radius: var(--radius-menu);
+    box-shadow:
+      var(--shadow-menu),
+      var(--lg-inner-highlight-strong),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .light .glass-menu {
+    background: var(--lg-bg-menu);
+    border: var(--lg-border-strong);
+    box-shadow:
+      var(--shadow-menu),
+      var(--lg-inner-highlight-strong),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+    color: rgba(0, 0, 0, 0.9);
   }
 }
 
-/* Native-feel easings */
-:root {
-  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.3, 0.42, 1);
+/* ==========================================================================
+   Global macOS overlay scrollbars
+   Dark is the default here, so `.light` supplies the light overrides.
+   `.no-scrollbar` (defined at the bottom) must still win.
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.26);
+  border-radius: 9px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.light ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.28);
+}
+.light ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.42);
 }
 
-/* Window enter animation */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.26) transparent;
+}
+.light * {
+  scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
+}
+
+/* Text selection — macOS accent tint */
+::selection {
+  background: rgba(10, 132, 255, 0.4);
+}
+.light ::selection {
+  background: rgba(0, 122, 255, 0.28);
+}
+
+/* ==========================================================================
+   Keyframes & animation utility classes
+   (transform / opacity / filter only — GPU-friendly)
+   ========================================================================== */
+
+/* Window enter */
 @keyframes window-open {
   from {
     opacity: 0;
@@ -101,6 +248,38 @@ body {
   animation: window-open 0.32s var(--ease-spring);
 }
 
+/* Window close */
+@keyframes window-close {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.82) translateY(10px);
+  }
+}
+.window-close {
+  animation: window-close 0.18s ease-in forwards;
+}
+
+/* Window minimize (genie-ish drop toward the dock) */
+@keyframes window-minimize {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.6) translateY(40vh);
+  }
+}
+.window-minimize {
+  transform-origin: bottom center;
+  animation: window-minimize 0.28s ease-in forwards;
+}
+
+/* Menu / dropdown enter */
 @keyframes menu-in {
   from {
     opacity: 0;
@@ -114,6 +293,73 @@ body {
 .menu-in {
   transform-origin: top left;
   animation: menu-in 0.16s var(--ease-out-quint);
+}
+
+/* Mobile app sheet — enter / exit */
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.sheet-up {
+  animation: sheet-up 0.38s var(--ease-out-expo);
+}
+@keyframes sheet-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+.sheet-down {
+  animation: sheet-down 0.28s ease-in forwards;
+}
+
+/* Photo grid item — `both` fill so inline animation-delay staggers work */
+@keyframes photo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.photo-in {
+  animation: photo-in 0.25s var(--ease-out-quint) both;
+}
+
+/* Lightbox image — bouncy pop */
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.lightbox-in {
+  animation: lightbox-in 0.3s var(--spring-bounce);
+}
+
+/* Generic fade (lightbox backdrop, etc.) */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade-in 0.2s ease-out;
 }
 
 /* Dock icon click blink (Tahoe-style quick dim) */
@@ -148,7 +394,7 @@ body {
   }
 }
 
-/* Hide scrollbars but keep scroll */
+/* Hide scrollbars but keep scroll — must win over the global overlay bars above */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

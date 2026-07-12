@@ -99,7 +99,7 @@ export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onR
           <PoopLogo className="h-4 w-4" />
         </button>
         {appleOpen && (
-          <div className="menu-in glass absolute left-0 top-8 w-56 rounded-xl p-1">
+          <div className="menu-in glass-menu absolute left-0 top-8 w-56 rounded-[var(--radius-menu)] p-1">
             {item("About This Mac", () => openWindow("about"))}
             <div className="mx-2 my-1 h-px bg-black/10 dark:bg-white/15" />
             {item("System Settings…", () => openWindow("settings"))}

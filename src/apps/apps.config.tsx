@@ -5,11 +5,13 @@ import {
   GithubIcon,
   LinkedinIcon,
   MusicIcon,
+  PhotosIcon,
   SettingsIcon,
   TerminalIcon,
 } from "../icons/AppIcons";
 import AboutJack from "./AboutJack";
 import Chrome from "./Chrome";
+import Photos from "./Photos";
 import Terminal from "./Terminal";
 import Settings from "./Settings";
 import YouTubeMusic from "./YouTubeMusic";
@@ -47,6 +49,16 @@ export const apps: AppDef[] = [
     component: Chrome,
     defaultSize: { width: 960, height: 620 },
     defaultPosition: { x: 200, y: 60 },
+  },
+  {
+    id: "photos",
+    title: "Photos",
+    icon: <PhotosIcon />,
+    dock: true,
+    desktop: true,
+    component: Photos,
+    defaultSize: { width: 980, height: 640 },
+    defaultPosition: { x: 160, y: 70 },
   },
   {
     id: "terminal",

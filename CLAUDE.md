@@ -21,11 +21,11 @@ No `gh` CLI. Push works via macOS keychain (`git push origin main`). Token if ne
 - Wallpapers: `public/wallpapers/*.svg`, registered in `src/state/settings.ts` (Jack may drop real images later)
 - OS shell: `src/os/` (BootScreen, LockScreen, Desktop, MenuBar, Dock, Window, DesktopIcon)
 - Apps: `src/apps/` registered in `apps.config.tsx` (id/title/icon/dock/desktop/external/component)
-- Icons: `src/icons/AppIcons.tsx` — all hand-drawn SVG. `PoopLogo` = system logo, vector-traced from `~/Downloads/poop_512.png` (Jack's design, replaces Apple logo)
+- Icons: `src/icons/AppIcons.tsx` — app icons are downscaled WebP bitmaps in `src/icons/app-icons/` (Finder/Terminal/Settings/Photos, wrapped by `AppIconImg`); `MusicIcon` and the social tiles stay hand-drawn SVG. `PoopLogo` = system logo, vector-traced from `~/Downloads/poop_512.png` (Jack's design, replaces the Apple logo — never mention Apple in the UI)
 
 ## Design rules (Jack is serious about these)
 
-- **Never ship Apple's actual assets** (icons/wallpapers/fonts) — everything hand-drawn, but should look/feel as close to real macOS Tahoe as possible
+- **App icons** are sourced from the MIT-licensed [aakashsharma003/macOS-Portfolio](https://github.com/aakashsharma003/macOS-Portfolio) repo (downscaled WebP in `src/icons/app-icons/`). **Wallpapers and fonts are still never Apple's** — hand-drawn/self-hosted only. The poop logo remains the system logo (never the Apple logo; never mention Apple in the UI). Everything should look/feel as close to real macOS Tahoe as possible.
 - Liquid Glass = `.liquid-glass` class in `src/index.css` + SVG `#lg-distortion` filter in `App.tsx` (refraction wobble is Chromium-only; degrades gracefully)
 - Dock: static icons, blink-dim on click — **no magnification** (Jack explicitly removed it)
 - Animations on transform/opacity only, easings in `:root` CSS vars

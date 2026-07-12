@@ -98,7 +98,7 @@ export default function YouTubeMusic() {
       <div className="flex items-center gap-3 border-b border-white/10 px-4 py-2.5">
         <div className="flex items-center gap-1.5">
           <svg viewBox="0 0 100 100" className="h-6 w-6">
-            <circle cx="50" cy="50" r="46" fill="#FF0033" />
+            <circle cx="50" cy="50" r="46" fill="#FF0000" />
             <circle cx="50" cy="50" r="30" fill="none" stroke="#fff" strokeWidth="6" />
             <path d="M42 36 L68 50 L42 64 Z" fill="#fff" />
           </svg>
