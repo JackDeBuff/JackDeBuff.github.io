@@ -147,30 +147,37 @@ export default function AboutJack() {
         )}
 
         {section === "Resume" && (
-          <div className="grid h-full place-items-center">
-            <div className="text-center">
-              <div className="text-5xl">📎</div>
-              <p className="mt-3 font-medium">resume.pdf</p>
-              <p className="mt-1 text-sm text-zinc-500">Coming soon — meanwhile:</p>
-              <div className="mt-4 flex justify-center gap-3">
-                <a
-                  href={profile.linkedin}
-                  target="_blank"
-                  rel="noopener"
-                  className="rounded-full bg-blue-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-400"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href={profile.github}
-                  target="_blank"
-                  rel="noopener"
-                  className="rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium hover:bg-white/20"
-                >
-                  GitHub
-                </a>
-              </div>
+          <div className="flex h-full flex-col">
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-sm font-medium text-zinc-400">CV_Supawich.pdf</span>
+              <a
+                href={`${import.meta.env.BASE_URL}resume.pdf`}
+                download="CV_Supawich_Puengdang.pdf"
+                className="rounded-full bg-blue-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-400"
+              >
+                ⇩ Download
+              </a>
             </div>
+            <object
+              data={`${import.meta.env.BASE_URL}resume.pdf`}
+              type="application/pdf"
+              className="min-h-0 w-full flex-1 rounded-xl bg-white"
+            >
+              <div className="grid h-full place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
+                <p className="text-sm text-zinc-400">
+                  Your browser can't preview PDFs —{" "}
+                  <a
+                    href={`${import.meta.env.BASE_URL}resume.pdf`}
+                    target="_blank"
+                    rel="noopener"
+                    className="text-sky-400 hover:underline"
+                  >
+                    open it here
+                  </a>
+                  .
+                </p>
+              </div>
+            </object>
           </div>
         )}
       </main>

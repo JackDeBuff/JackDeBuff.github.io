@@ -54,13 +54,13 @@ export const profile = {
       title: "Thailand Asset Value Estimation Using Aerial or Satellite Imagery",
       venue: "IEEE TENCON 2023",
       doi: "https://doi.org/10.1109/TENCON58879.2023.10322494",
-      note: "A breakthrough pioneering AI-driven asset valuation in the Thai asset industry 🚀 — Siamese-inspired network with an EfficientNet backbone, AUC 0.81.",
+      note: "A breakthrough pioneering AI-driven asset valuation in the Thai asset industry 🚀 — Siamese-inspired network with an EfficientNet backbone: AUC 0.81, recall up from 59.26% to 69.55% over baseline.",
     },
     {
       title: "EEG-Based Person Authentication Using Deep Learning with Visual Stimulation",
       venue: "IEEE KST 2019",
       doi: "https://doi.org/10.1109/KST.2019.8687819",
-      note: "SSVEP + ERP brainwaves → LSTM → your brain is your password. 35 citations 📈 and climbing.",
+      note: "SSVEP + ERP brainwaves → LSTM → your brain is your password, on consumer-grade BCI devices. 35 citations 📈 and climbing.",
     },
   ],
   awards: [
@@ -78,7 +78,7 @@ export const profile = {
     },
     {
       name: "Intel ISEF 2018 — Finalist",
-      detail: "EEG-based biometric authentication; later won Best of IT at the Prime Minister's Science Awards 2019 and 1st Prize at ASEAN Student Science Project 2018.",
+      detail: "EEG-based biometric authentication; the same project won Best of IT at the Prime Minister's Science Awards 2019, 1st Prize at ASEAN Student Science Project 2018, and Runner-up at the Young Scientist Competition 2018.",
     },
     {
       name: "Outstanding National Youth Award 2019",
@@ -87,12 +87,12 @@ export const profile = {
   ],
   skills: {
     "ML / Deep Learning": ["PyTorch", "TensorFlow", "scikit-learn"],
-    "Data & Analytics": ["Pandas", "NumPy", "Plotly", "Gradio"],
+    "Data & Analytics": ["Pandas", "NumPy", "Plotly", "Gradio", "BeautifulSoup"],
     Geospatial: ["GeoPandas", "Shapely", "Folium"],
     Languages: ["Python", "C", "C++", "Go", "SQL"],
     Infra: ["Docker", "Kubernetes", "MongoDB"],
   },
 } as const;
 
-/** Swap in Jack's real playlist ID later. This is a placeholder lo-fi playlist. */
-export const YT_PLAYLIST_ID = "PLOzDu-MXXLliO9fBNZOQTBDddoA3FzZUo";
+/** Jack's "JackDeBuff" playlist (music.youtube.com/playlist?list=PLUgvJ4CJAUaI). */
+export const YT_PLAYLIST_ID = "PLUgvJ4CJAUaI";
