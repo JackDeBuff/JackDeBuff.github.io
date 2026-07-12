@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2560 1440" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7dd3fc"/><stop offset="0.55" stop-color="#bae6fd"/><stop offset="1" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <filter id="b" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="90"/></filter>
+  </defs>
+  <rect width="2560" height="1440" fill="url(#sky)"/>
+  <ellipse cx="500" cy="300" rx="700" ry="320" fill="#fff" opacity="0.55" filter="url(#b)"/>
+  <ellipse cx="2000" cy="1150" rx="900" ry="400" fill="#38bdf8" opacity="0.35" filter="url(#b)"/>
+  <path d="M0 1000 L560 600 L950 940 L1400 520 L1860 980 L2280 700 L2560 920 V1440 H0 Z" fill="#7ba7c9" opacity="0.75"/>
+  <path d="M0 1150 L460 860 L880 1110 L1340 800 L1800 1150 L2220 920 L2560 1100 V1440 H0 Z" fill="#5083ab" opacity="0.85"/>
+</svg>

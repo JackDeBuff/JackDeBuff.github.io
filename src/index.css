@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  @apply font-system antialiased select-none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer components {
+  /* Liquid Glass — multi-layer translucent material (Tahoe) */
+  .glass {
+    position: relative;
+    backdrop-filter: blur(28px) saturate(1.8);
+    -webkit-backdrop-filter: blur(28px) saturate(1.8);
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.09),
+        rgba(255, 255, 255, 0.03) 40%,
+        rgba(255, 255, 255, 0) 70%
+      ),
+      rgba(30, 30, 34, 0.42);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+  .light .glass {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.55),
+        rgba(255, 255, 255, 0.25) 45%,
+        rgba(255, 255, 255, 0.1) 75%
+      ),
+      rgba(246, 246, 250, 0.45);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+      0 12px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  .glass-thin {
+    backdrop-filter: blur(18px) saturate(1.6);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    background: rgba(28, 28, 32, 0.35);
+    box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.18);
+  }
+  .light .glass-thin {
+    background: rgba(250, 250, 253, 0.5);
+    box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Native-feel easings */
+:root {
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.3, 0.42, 1);
+}
+
+/* Window enter animation */
+@keyframes window-open {
+  from {
+    opacity: 0;
+    transform: scale(0.82) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.window-open {
+  animation: window-open 0.32s var(--ease-spring);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.menu-in {
+  transform-origin: top left;
+  animation: menu-in 0.16s var(--ease-out-quint);
+}
+
+/* Boot progress */
+@keyframes boot-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Hide scrollbars but keep scroll (menu panes) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Terminal caret */
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.caret-blink {
+  animation: caret-blink 1.1s steps(1) infinite;
+}
