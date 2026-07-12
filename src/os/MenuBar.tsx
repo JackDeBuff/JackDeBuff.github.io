@@ -83,7 +83,7 @@ export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onR
         action?.();
         setAppleOpen(false);
       }}
-      className="block w-full rounded-md px-3 py-1 text-left text-[13px] text-zinc-100 enabled:hover:bg-blue-500 enabled:hover:text-white disabled:text-zinc-500"
+      className="block w-full rounded-md px-3 py-1 text-left text-[13px] text-zinc-800 enabled:hover:bg-blue-500 enabled:hover:text-white disabled:text-zinc-400 dark:text-zinc-100 dark:disabled:text-zinc-500"
     >
       {label}
     </button>
@@ -101,9 +101,9 @@ export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onR
         {appleOpen && (
           <div className="menu-in glass absolute left-0 top-8 w-56 rounded-xl p-1">
             {item("About This Mac", () => openWindow("about"))}
-            <div className="mx-2 my-1 h-px bg-white/15" />
+            <div className="mx-2 my-1 h-px bg-black/10 dark:bg-white/15" />
             {item("System Settings…", () => openWindow("settings"))}
-            <div className="mx-2 my-1 h-px bg-white/15" />
+            <div className="mx-2 my-1 h-px bg-black/10 dark:bg-white/15" />
             {item("Lock Screen", onLock)}
             {item("Restart…", onRestart)}
             {item("Shut Down…", onRestart)}

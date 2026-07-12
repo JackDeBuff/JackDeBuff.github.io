@@ -2,9 +2,36 @@ import { useRef, useState } from "react";
 
 const HOME_URL = "https://www.google.com/webhp?igu=1";
 
-const BOOKMARKS: { label: string; url: string }[] = [
+/** Jack's favourite song — Gut Genug, obviously. Starts at the good part. */
+const GUT_GENUG_URL = "https://www.youtube-nocookie.com/embed/0GnA8VYOfko?start=14&autoplay=1";
+
+/**
+ * Wikipedia article for the visitor's country, via IP lookup (no browser
+ * geolocation permission involved). Falls back to Thailand 🇹🇭.
+ */
+let wikiCountryUrl: string | null = null;
+async function getWikipediaUrl(): Promise<string> {
+  if (wikiCountryUrl) return wikiCountryUrl;
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 2500);
+    const res = await fetch("https://ipwho.is/?fields=country", { signal: ctrl.signal });
+    clearTimeout(t);
+    const data = await res.json();
+    if (data?.country) {
+      wikiCountryUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(data.country.replace(/ /g, "_"))}`;
+      return wikiCountryUrl;
+    }
+  } catch {
+    /* fall through to Thailand */
+  }
+  return "https://en.wikipedia.org/wiki/Thailand";
+}
+
+const BOOKMARKS: { label: string; url?: string; resolve?: () => Promise<string> }[] = [
   { label: "Google", url: HOME_URL },
-  { label: "Wikipedia", url: "https://en.wikipedia.org/wiki/Machine_learning" },
+  { label: "Wikipedia", resolve: getWikipediaUrl },
+  { label: "Gut Genug 🎶", url: GUT_GENUG_URL },
   { label: "jackdebuff.github.io", url: "https://jackdebuff.github.io" },
 ];
 
@@ -84,7 +111,10 @@ export default function Chrome() {
         {BOOKMARKS.map((b) => (
           <button
             key={b.label}
-            onClick={() => go(b.url)}
+            onClick={() => {
+              if (b.url) go(b.url);
+              else b.resolve?.().then(go);
+            }}
             className="rounded-md px-2.5 py-0.5 text-xs text-zinc-300 hover:bg-white/10"
           >
             {b.label}
