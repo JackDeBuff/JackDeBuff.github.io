@@ -100,33 +100,32 @@ export default function LockScreen({ onUnlock }: { onUnlock: () => void }) {
           <div className="text-[96px] font-bold leading-none tracking-tight">{fmtTime.format(now)}</div>
         </div>
         <div className="flex-1" />
-        <div className={`flex flex-col items-center gap-3 ${isMobile ? "mb-8" : "mb-24"}`}>
-          <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-b from-sky-400 to-blue-600 text-3xl font-bold shadow-lg ring-2 ring-white/40">
-            J
-          </div>
-          <div className="text-lg font-semibold [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
-            {profile.name}
-          </div>
-          {!isMobile && (
-            // Force a consistently dark translucent pill so white text stays
-            // readable in BOTH appearances (glass-thin turns near-white in light mode).
-            <div className="rounded-full bg-black/25 px-5 py-1.5 text-sm text-white/90 ring-1 ring-white/25 backdrop-blur">
+        {!isMobile && (
+          <div className="mb-24 flex flex-col items-center gap-3">
+            <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-b from-sky-400 to-blue-600 text-3xl font-bold shadow-lg ring-2 ring-white/40">
+              J
+            </div>
+            <div className="text-lg font-semibold [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+              {profile.name}
+            </div>
+            {/* liquid-glass-dim pins the dark glass recipe in light mode too —
+                the lock backdrop is always a dimmed wallpaper. */}
+            <div className="liquid-glass liquid-glass-dim rounded-full px-5 py-1.5 text-sm text-white/90">
               Click or press Enter to log in
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {isMobile && (
-          // iOS-style swipe-up affordance. Tapping it is an accessibility fallback.
+          // iOS-style swipe-up affordance: bare shimmer text, no pill.
+          // Tapping it is an accessibility fallback.
           <button
             type="button"
             aria-label="Swipe up to unlock"
             onClick={unlock}
-            className="mb-9 flex cursor-pointer flex-col items-center gap-4 bg-transparent"
+            className="mb-9 flex cursor-pointer flex-col items-center gap-5 bg-transparent"
           >
-            <span className="liquid-glass rounded-full px-4 py-1.5">
-              <span className="lock-shimmer text-sm font-medium">Swipe up to unlock</span>
-            </span>
+            <span className="lock-shimmer text-[15px] font-medium">Swipe up to unlock</span>
             <span className="lock-home-indicator block h-[5px] w-[140px] rounded-full bg-white/90" />
           </button>
         )}

@@ -12,13 +12,14 @@ import photosIcon from "./app-icons/photos.webp";
  */
 
 /** Renders a bitmap app icon. The source PNGs bake in their own squircle
- *  padding + drop shadow, so `scale-[1.08]` optically matches the SVG tiles. */
+ *  padding + drop shadow; the SVG Squircle below uses the same ~80% tile
+ *  footprint so both families render at identical optical size. */
 function AppIconImg({ src, alt }: { src: string; alt: string }) {
   return (
     <img
       src={src}
       alt={alt}
-      className="h-full w-full scale-[1.08] object-contain"
+      className="h-full w-full object-contain"
       draggable={false}
     />
   );
@@ -50,24 +51,25 @@ function Squircle({
         </filter>
       </defs>
       <g filter={`url(#${id}-ds)`}>
-        {/* macOS-style continuous corner: pseudo-superellipse via high-radius rounded rect */}
-        <path
-          d="M50 4 C 77 4 96 4 96 50 C 96 96 77 96 50 96 C 23 96 4 96 4 50 C 4 4 23 4 50 4 Z"
-          fill={`url(#${id}-g)`}
-        />
-        <path
-          d="M50 4 C 77 4 96 4 96 50 C 96 96 77 96 50 96 C 23 96 4 96 4 50 C 4 4 23 4 50 4 Z"
-          fill={`url(#${id}-shine)`}
-        />
-        <path
-          d="M50 4.5 C 76.7 4.5 95.5 4.5 95.5 50 C 95.5 95.5 76.7 95.5 50 95.5 C 23.3 95.5 4.5 95.5 4.5 50 C 4.5 4.5 23.3 4.5 50 4.5 Z"
+        {/* Real macOS icon-grid tile: 80% footprint, corner radius ≈ 22.4% of
+            the tile — matches the bitmap icons (Notes/Terminal/Settings/Photos)
+            so all app icons share one silhouette. */}
+        <rect x="10" y="10" width="80" height="80" rx="18" fill={`url(#${id}-g)`} />
+        <rect x="10" y="10" width="80" height="80" rx="18" fill={`url(#${id}-shine)`} />
+        <rect
+          x="10.5"
+          y="10.5"
+          width="79"
+          height="79"
+          rx="17.6"
           fill="none"
           stroke="#fff"
           strokeOpacity="0.22"
           strokeWidth="1"
         />
       </g>
-      {children}
+      {/* glyphs were drawn for the old full-bleed tile — shrink to the new tile */}
+      <g transform="translate(50 50) scale(0.8) translate(-50 -50)">{children}</g>
     </svg>
   );
 }

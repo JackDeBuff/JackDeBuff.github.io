@@ -58,13 +58,17 @@ export default function MobileAppSheet({
       {/* iOS home indicator — generous invisible tap area, closes the app.
           mix-blend-difference keeps the pill visible on any background
           (renders white over dark, dark over light). */}
+      {/* The blend lives on the BUTTON: its `absolute z-10` makes it a stacking
+          context, so a blend on the child span would only blend against the
+          transparent button (always white). On the button it blends against
+          the app content below — white bar over dark apps, dark over light. */}
       <button
         aria-label="Close app"
         onClick={() => setClosing(true)}
-        className="absolute inset-x-0 bottom-0 z-10 flex h-8 items-end justify-center"
+        className="absolute inset-x-0 bottom-0 z-10 flex h-8 items-end justify-center mix-blend-difference"
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 8px)" }}
       >
-        <span className="h-[5px] w-32 rounded-full bg-white mix-blend-difference" />
+        <span className="h-[5px] w-32 rounded-full bg-white" />
       </button>
     </div>
   );
