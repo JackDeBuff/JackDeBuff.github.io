@@ -62,21 +62,26 @@ function LockGlyph() {
  * iOS-style status bar. `overContent` flips the palette: over the wallpaper
  * (home) it is white with a shadow so it reads on any wallpaper; over an open
  * app sheet it matches the sheet's opaque surface (dark text in light mode,
- * white in dark mode).
+ * white in dark mode). `darkSurface` overrides that to always-white for sheets
+ * that render a near-black surface (Music/Terminal) regardless of appearance.
  */
 export default function MobileStatusBar({
   onLock,
   overContent = false,
+  darkSurface = false,
 }: {
   onLock: () => void;
   overContent?: boolean;
+  darkSurface?: boolean;
 }) {
   const now = useClock();
 
   return (
     <div
       className={`pointer-events-none absolute inset-x-0 top-0 z-50 flex items-center justify-between px-7 ${
-        overContent
+        darkSurface
+          ? "text-white"
+          : overContent
           ? "text-zinc-900 dark:text-white"
           : "text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]"
       }`}

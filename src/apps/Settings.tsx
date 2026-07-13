@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { useSettings, WALLPAPERS, wallpaperUrl, type Appearance } from "../state/settings";
 import { profile } from "../data/profile";
+import { PoopLogo } from "../icons/AppIcons";
 
 const PANES = ["Appearance", "Wallpaper", "About"] as const;
 type Pane = (typeof PANES)[number];
 
 const PANE_ICONS: Record<Pane, string> = { Appearance: "🌗", Wallpaper: "🖼️", About: "💻" };
+
+const ABOUT_SPECS: { label: string; value: string }[] = [
+  { label: "Chip", value: "Jack M∞ (Imagination Engine)" },
+  { label: "Memory", value: "∞ GB unified imagination" },
+  { label: "Startup Disk", value: "Poop HD" },
+  { label: "Serial number", value: "JACK-2026-DEBUFF" },
+  { label: "macOS", value: "jackOS 26 Tahoe — Portfolio Edition" },
+  { label: "Owner", value: profile.name },
+];
 
 export default function Settings() {
   const [pane, setPane] = useState<Pane>("Wallpaper");
@@ -91,16 +101,27 @@ export default function Settings() {
         )}
 
         {pane === "About" && (
-          <div className="flex h-full flex-col items-center justify-center text-center">
-            <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-to-b from-sky-400 to-blue-600 text-3xl font-bold text-white">
-              J
+          <div className="mx-auto flex max-w-md flex-col items-center text-center">
+            <div
+              className="mt-2 grid h-24 w-24 place-items-center rounded-full"
+              style={{ background: "radial-gradient(circle at 50% 38%, rgba(180,120,60,0.28), rgba(120,72,32,0.05) 70%)" }}
+            >
+              <PoopLogo className="h-16 w-16 text-amber-700 dark:text-amber-500" />
             </div>
-            <h1 className="mt-4 text-xl font-bold">Jack's MacBook Pro</h1>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">jackOS 26 “Tahoe” · Portfolio Edition</p>
-            <div className="mt-4 space-y-1 text-sm text-zinc-700 dark:text-zinc-300">
-              <p>Chip — Apple M∞ (Imagination Engine)</p>
-              <p>Memory — 411 Keep notes migrated</p>
-              <p>Owner — {profile.name}</p>
+            <h1 className="mt-4 text-xl font-bold">MacBook Pro</h1>
+            <p className="mt-0.5 text-sm text-zinc-500 dark:text-zinc-400">14-inch, 2026</p>
+            <div className="mt-5 w-full overflow-hidden rounded-xl ring-1 ring-black/10 dark:ring-white/10">
+              {ABOUT_SPECS.map((row, i) => (
+                <div
+                  key={row.label}
+                  className={`flex items-center justify-between gap-3 px-4 py-2 text-[13px] ${
+                    i % 2 === 0 ? "bg-black/[0.03] dark:bg-white/[0.04]" : "bg-white/50 dark:bg-white/[0.02]"
+                  } ${i < ABOUT_SPECS.length - 1 ? "border-b border-black/[0.06] dark:border-white/[0.06]" : ""}`}
+                >
+                  <span className="shrink-0 text-zinc-500 dark:text-zinc-400">{row.label}</span>
+                  <span className="text-right font-medium text-zinc-800 dark:text-zinc-100">{row.value}</span>
+                </div>
+              ))}
             </div>
             <p className="mt-6 max-w-sm text-xs leading-relaxed text-zinc-500">
               Built with React + Tailwind. UI inspired by macOS Tahoe (no Apple assets used) and{" "}

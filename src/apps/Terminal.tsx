@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { HOME, type FsDir } from "../data/filesystem";
 import { profile } from "../data/profile";
 import { useWindows } from "../state/windows";
+import { useIsMobile } from "../state/useIsMobile";
 
 interface Line {
   prompt?: string;
@@ -41,6 +42,7 @@ export default function Terminal() {
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const { openWindow } = useWindows();
+  const mobile = useIsMobile();
 
   const promptStr = `jack@macbook ${cwd.length ? "~/" + cwd.join("/") : "~"} %`;
 
@@ -176,7 +178,7 @@ export default function Terminal() {
 
   return (
     <div
-      className="h-full cursor-text overflow-y-auto bg-zinc-950/90 p-3 font-mono text-[13px] leading-relaxed text-zinc-100"
+      className="h-full cursor-text overflow-y-auto bg-zinc-950/90 p-3 font-mono text-[16px] leading-relaxed text-zinc-100 md:text-[13px]"
       onClick={() => inputRef.current?.focus()}
     >
       {lines.map((l, i) => (
@@ -189,7 +191,7 @@ export default function Terminal() {
         <span className="shrink-0 font-semibold text-emerald-400">{promptStr}&nbsp;</span>
         <input
           ref={inputRef}
-          autoFocus
+          autoFocus={!mobile}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {

@@ -1,7 +1,9 @@
+import { useState } from "react";
 import MenuBar from "./MenuBar";
 import Dock from "./Dock";
 import DesktopIcon from "./DesktopIcon";
 import WindowFrame from "./Window";
+import AboutThisMac from "./AboutThisMac";
 import { apps } from "../apps/apps.config";
 import { useWindows } from "../state/windows";
 import { useSettings, wallpaperUrl } from "../state/settings";
@@ -9,13 +11,14 @@ import { useSettings, wallpaperUrl } from "../state/settings";
 export default function Desktop({ onLock, onRestart }: { onLock: () => void; onRestart: () => void }) {
   const { openWindow } = useWindows();
   const wallpaper = useSettings((s) => s.wallpaper);
+  const [aboutMacOpen, setAboutMacOpen] = useState(false);
 
   return (
     <div
       className="relative h-full w-full overflow-hidden bg-cover bg-center transition-[background-image] duration-300"
       style={{ backgroundImage: `url(${wallpaperUrl(wallpaper)})` }}
     >
-      <MenuBar onLock={onLock} onRestart={onRestart} />
+      <MenuBar onLock={onLock} onRestart={onRestart} onAboutMac={() => setAboutMacOpen(true)} />
 
       {/* Desktop shortcuts — right-aligned column, macOS style */}
       <div className="absolute right-3 top-10 flex flex-col items-end gap-1">
@@ -55,6 +58,8 @@ export default function Desktop({ onLock, onRestart }: { onLock: () => void; onR
       </div>
 
       <Dock />
+
+      {aboutMacOpen && <AboutThisMac onClose={() => setAboutMacOpen(false)} />}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useSettings, wallpaperUrl } from "../state/settings";
 import MobileStatusBar from "./MobileStatusBar";
 import MobileHome from "./MobileHome";
 import MobileDock from "./MobileDock";
-import MobileAppSheet from "./MobileAppSheet";
+import MobileAppSheet, { BARE_DARK_APPS } from "./MobileAppSheet";
 
 /**
  * iOS-style mobile shell: a single full-screen app at a time (no z-order,
@@ -44,8 +44,14 @@ export default function MobileShell({ onLock }: { onLock: () => void }) {
         />
       )}
 
-      {/* Always on top so the clock stays visible over any app sheet. */}
-      <MobileStatusBar onLock={onLock} overContent={!!activeApp} />
+      {/* Always on top so the clock stays visible over any app sheet. Bare dark
+          apps (Music/Terminal) present a near-black sheet, so the status bar
+          needs a forced-light palette rather than the light-mode dark text. */}
+      <MobileStatusBar
+        onLock={onLock}
+        overContent={!!activeApp}
+        darkSurface={!!activeApp && BARE_DARK_APPS.has(activeApp.id)}
+      />
     </div>
   );
 }

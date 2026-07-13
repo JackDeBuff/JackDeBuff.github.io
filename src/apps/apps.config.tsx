@@ -1,6 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import {
-  AboutIcon,
+  NotesIcon,
   ChromeIcon,
   GithubIcon,
   LinkedinIcon,
@@ -9,7 +9,7 @@ import {
   SettingsIcon,
   TerminalIcon,
 } from "../icons/AppIcons";
-import AboutJack from "./AboutJack";
+import Notes from "./Notes";
 import Chrome from "./Chrome";
 import Photos from "./Photos";
 import Terminal from "./Terminal";
@@ -32,12 +32,12 @@ export interface AppDef {
 export const apps: AppDef[] = [
   {
     id: "about",
-    title: "About Jack",
-    icon: <AboutIcon />,
+    title: "Notes",
+    icon: <NotesIcon />,
     dock: true,
     desktop: true,
-    component: AboutJack,
-    defaultSize: { width: 860, height: 560 },
+    component: Notes,
+    defaultSize: { width: 900, height: 600 },
     defaultPosition: { x: 120, y: 80 },
   },
   {

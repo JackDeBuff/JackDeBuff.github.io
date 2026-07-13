@@ -107,7 +107,7 @@ export default function Chrome() {
         </a>
       </div>
       {/* Bookmarks bar */}
-      <div className="flex gap-1 border-b border-black/40 bg-zinc-900/80 px-3 py-1">
+      <div className="no-scrollbar flex items-center gap-1 overflow-x-auto border-b border-black/40 bg-zinc-900/80 px-3 py-1">
         {BOOKMARKS.map((b) => (
           <button
             key={b.label}
@@ -115,12 +115,12 @@ export default function Chrome() {
               if (b.url) go(b.url);
               else b.resolve?.().then(go);
             }}
-            className="rounded-md px-2.5 py-0.5 text-xs text-zinc-300 hover:bg-white/10"
+            className="shrink-0 whitespace-nowrap rounded-md px-2.5 py-0.5 text-xs text-zinc-300 hover:bg-white/10"
           >
             {b.label}
           </button>
         ))}
-        <span className="ml-auto self-center text-[10px] text-zinc-500">
+        <span className="ml-auto hidden shrink-0 self-center whitespace-nowrap pl-2 text-[10px] text-zinc-500 md:inline">
           some sites refuse to load in an embedded browser — use ↗
         </span>
       </div>

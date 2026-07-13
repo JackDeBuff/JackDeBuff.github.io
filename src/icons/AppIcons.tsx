@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import finderIcon from "./app-icons/finder.webp";
+import notesIcon from "./app-icons/notes.webp";
 import terminalIcon from "./app-icons/terminal.webp";
 import settingsIcon from "./app-icons/settings.webp";
 import photosIcon from "./app-icons/photos.webp";
@@ -72,9 +72,9 @@ function Squircle({
   );
 }
 
-/** "About Jack" — Finder mark. */
-export function AboutIcon() {
-  return <AppIconImg src={finderIcon} alt="About Jack" />;
+/** "Jack's Notes" — Apple Notes mark. */
+export function NotesIcon() {
+  return <AppIconImg src={notesIcon} alt="Notes" />;
 }
 
 export function ChromeIcon() {

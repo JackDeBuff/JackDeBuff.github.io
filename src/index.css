@@ -401,3 +401,48 @@ body {
 .no-scrollbar {
   scrollbar-width: none;
 }
+
+/* ==========================================================================
+   Lock screen — iOS-style swipe-to-unlock affordances (mobile)
+   (background-position / transform / opacity only — GPU-friendly)
+   ========================================================================== */
+
+/* Repeating light sweep across the "Swipe up to unlock" text */
+@keyframes lock-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.lock-shimmer {
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.5) 30%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.5) 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: lock-shimmer 2.6s linear infinite;
+}
+
+/* Gentle upward nudge on the home-indicator bar */
+@keyframes lock-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+.lock-home-indicator {
+  animation: lock-nudge 1.9s var(--ease-out-quint) infinite;
+}

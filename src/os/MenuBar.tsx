@@ -57,7 +57,15 @@ function BatteryGlyph() {
   );
 }
 
-export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onRestart: () => void }) {
+export default function MenuBar({
+  onLock,
+  onRestart,
+  onAboutMac,
+}: {
+  onLock: () => void;
+  onRestart: () => void;
+  onAboutMac: () => void;
+}) {
   const now = useClock();
   const { activeId, openWindow } = useWindows();
   const [appleOpen, setAppleOpen] = useState(false);
@@ -100,7 +108,7 @@ export default function MenuBar({ onLock, onRestart }: { onLock: () => void; onR
         </button>
         {appleOpen && (
           <div className="menu-in glass-menu absolute left-0 top-8 w-56 rounded-[var(--radius-menu)] p-1">
-            {item("About This Mac", () => openWindow("about"))}
+            {item("About This Mac", onAboutMac)}
             <div className="mx-2 my-1 h-px bg-black/10 dark:bg-white/15" />
             {item("System Settings…", () => openWindow("settings"))}
             <div className="mx-2 my-1 h-px bg-black/10 dark:bg-white/15" />
