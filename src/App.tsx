@@ -3,7 +3,7 @@ import BootScreen from "./os/BootScreen";
 import LockScreen from "./os/LockScreen";
 import Desktop from "./os/Desktop";
 import MobileShell from "./mobile/MobileShell";
-import { useSettings } from "./state/settings";
+import { useSettings, wallpaperUrl } from "./state/settings";
 import { useIsMobile } from "./state/useIsMobile";
 
 type Stage = "boot" | "lock" | "desktop";
@@ -11,6 +11,7 @@ type Stage = "boot" | "lock" | "desktop";
 export default function App() {
   const [stage, setStage] = useState<Stage>("boot");
   const appearance = useSettings((s) => s.appearance);
+  const wallpaper = useSettings((s) => s.wallpaper);
   const mobile = useIsMobile();
 
   useEffect(() => {
@@ -18,6 +19,14 @@ export default function App() {
     root.classList.toggle("dark", appearance === "dark");
     root.classList.toggle("light", appearance === "light");
   }, [appearance]);
+
+  // Preload + decode the wallpaper during the boot screen so the lock screen's
+  // first paint already has it (first visits on mobile showed grey until a tap).
+  useEffect(() => {
+    const img = new Image();
+    img.src = wallpaperUrl(wallpaper);
+    img.decode?.().catch(() => {});
+  }, [wallpaper]);
 
   return (
     <div className="h-full w-full">

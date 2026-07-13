@@ -83,17 +83,28 @@ export default function LockScreen({ onUnlock }: { onUnlock: () => void }) {
 
   return (
     <div
-      className={`relative h-full w-full bg-cover bg-center ${
+      className={`relative h-full w-full overflow-hidden bg-zinc-900 ${
         isMobile ? "touch-none select-none" : `cursor-pointer ${desktopClasses}`
       }`}
-      style={{ backgroundImage: `url(${wallpaperUrl(wallpaper)})`, ...mobileStyle }}
+      style={mobileStyle}
       onClick={isMobile ? undefined : unlock}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
     >
-      <div className="absolute inset-0 backdrop-blur-2xl backdrop-brightness-75" />
+      {/* Wallpaper as a real <img> with the blur applied directly — NOT a CSS
+          background + backdrop-filter overlay: iOS Safari caches the backdrop
+          before the image loads (grey lock screen on first visit) and doesn't
+          repaint until a touch. An <img> repaints itself on load. scale-110
+          hides the blur's soft edges. */}
+      <img
+        src={wallpaperUrl(wallpaper)}
+        alt=""
+        aria-hidden
+        draggable={false}
+        className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl brightness-75"
+      />
       <div className="relative flex h-full flex-col items-center text-white">
         <div className="mt-20 text-center [text-shadow:0_2px_16px_rgba(0,0,0,0.4)]">
           <div className="text-2xl font-medium">{fmtDate.format(now)}</div>
