@@ -13,7 +13,7 @@ function useClock() {
 }
 
 const fmtDate = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric" });
-const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" });
+const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", hour12: false });
 
 /* Clean, symmetric status glyphs — all drawn on the same 16×16 grid, stroke-based */
 function WifiGlyph() {

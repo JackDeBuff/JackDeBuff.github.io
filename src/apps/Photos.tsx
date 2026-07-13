@@ -6,7 +6,7 @@ import { useIsMobile } from "../state/useIsMobile";
    Discovery — every image dropped in ../photos shows up automatically.
    The <string> generic + import:"default" keep tsc happy (values are urls).
    -------------------------------------------------------------------------- */
-const photoModules = import.meta.glob<string>("../photos/*.{jpg,jpeg,png,webp}", {
+const photoModules = import.meta.glob<string>("../photos/*.{jpg,jpeg,png,webp,gif}", {
   eager: true,
   query: "?url",
   import: "default",

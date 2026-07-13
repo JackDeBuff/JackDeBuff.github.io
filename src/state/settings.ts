@@ -19,6 +19,10 @@ export const WALLPAPERS: WallpaperDef[] = [
   { id: "graphite", name: "Graphite", file: "wallpapers/graphite.svg", tone: "dark" },
   { id: "lavender", name: "Lavender", file: "wallpapers/lavender.svg", tone: "light" },
   { id: "mint", name: "Mint", file: "wallpapers/mint.svg", tone: "light" },
+  { id: "whitesur", name: "WhiteSur", file: "wallpapers/WhiteSur.jpg", tone: "dark" },
+  { id: "whitesur-light", name: "WhiteSur Light", file: "wallpapers/WhiteSur-light.jpg", tone: "light" },
+  { id: "monterey", name: "Monterey", file: "wallpapers/Monterey.jpg", tone: "dark" },
+  { id: "monterey-light", name: "Monterey Light", file: "wallpapers/Monterey-light.jpg", tone: "light" },
 ];
 
 export function wallpaperUrl(id: string): string {

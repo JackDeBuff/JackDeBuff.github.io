@@ -132,7 +132,13 @@ export default function Settings() {
               <a className="text-sky-600 hover:underline dark:text-sky-400" href="https://github.com/aakashsharma003/macOS-Portfolio" target="_blank" rel="noopener">
                 aakashsharma003/macOS-Portfolio
               </a>{" "}
-              (MIT).
+              (MIT). LinkedIn icon by{" "}
+              <a className="text-sky-600 hover:underline dark:text-sky-400" href="https://icons8.com" target="_blank" rel="noopener">
+                Icons8
+              </a>. Wallpapers from{" "}
+              <a className="text-sky-600 hover:underline dark:text-sky-400" href="https://github.com/vinceliuice/WhiteSur-wallpapers" target="_blank" rel="noopener">
+                vinceliuice/WhiteSur-wallpapers
+              </a>. The photos are Jack's own and not covered by the MIT license — personal assets, memes, and Zelda screenshots under fair use.
             </p>
           </div>
         )}

@@ -10,9 +10,9 @@ function useClock() {
   return now;
 }
 
-const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" });
+const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", hour12: false });
 /** iOS status bar shows no AM/PM. */
-const clockText = (now: Date) => fmtTime.format(now).replace(/\s?[AP]M$/i, "");
+const clockText = (now: Date) => fmtTime.format(now);
 
 /* Tiny iOS-scale status glyphs, all matched to ~11px height, using currentColor
    so they adapt to the status bar's text color in light/dark. */

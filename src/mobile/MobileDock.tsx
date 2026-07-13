@@ -19,14 +19,14 @@ export default function MobileDock({ onOpen }: { onOpen: (app: AppDef) => void }
     >
       <div
         className="liquid-glass pointer-events-auto flex w-full max-w-[380px] items-center justify-around rounded-[var(--radius-dock)] px-3"
-        style={{ height: 84 }}
+        style={{ height: 92 }}
       >
         {dockApps.map((app) => (
           <button
             key={app.id}
             aria-label={app.title}
             onClick={() => onOpen(app)}
-            className="grid h-[58px] w-[58px] place-items-center transition-transform duration-150 ease-out active:scale-90"
+            className="grid h-[64px] w-[64px] place-items-center transition-transform duration-150 ease-out active:scale-90"
           >
             {app.icon}
           </button>

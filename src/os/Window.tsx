@@ -44,6 +44,13 @@ export default function WindowFrame({
     prevVisible.current = visible;
   }, [st?.open, st?.minimized]);
 
+  const [vp, setVp] = useState({ w: window.innerWidth, h: window.innerHeight });
+  useEffect(() => {
+    const onResize = () => setVp({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   if (!st?.open) return null;
 
   const active = activeId === id;
@@ -78,7 +85,7 @@ export default function WindowFrame({
       default={{ ...defaultPosition, ...defaultSize }}
       size={
         maximized
-          ? { width: "100%", height: `calc(100% - ${MENUBAR_H + DOCK_SAFE}px)` }
+          ? { width: vp.w, height: vp.h - MENUBAR_H - DOCK_SAFE }
           : undefined
       }
       position={maximized ? { x: 0, y: MENUBAR_H } : undefined}

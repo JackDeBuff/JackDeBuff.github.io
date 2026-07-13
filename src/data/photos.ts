@@ -13,32 +13,71 @@ export interface PhotoMeta {
  * fall back to the filename (minus extension) as their title.
  */
 export const photoMeta: Record<string, PhotoMeta> = {
-  "sequoia-dusk-evening.webp": {
-    title: "Dusk over the Ridge",
-    description:
-      "The last light bleeding purple behind the peaks. Waited an hour for the moon to peek out — worth it.",
-    date: "2025-11-14",
-    album: "Landscapes",
+  // Travel
+  "mt-fuji-fujiq-2026.jpg": {
+    title: "Mt. Fuji from Fuji-Q",
+    description: "Clear-day Fuji framed by the coasters at Fuji-Q Highland. Worth freezing for.",
+    date: "2026-01-10",
+    album: "Travel",
     liked: true,
   },
-  "lake-tahoe-night.webp": {
-    title: "Midnight at the Lake",
-    description:
-      "A cold clear night by the water. You could see every star, and one very smug moon.",
-    date: "2025-10-02",
-    album: "Landscapes",
+  "the-vessel-nyc-2025.jpg": {
+    title: "The Vessel, NYC",
+    description: "Christmas night at Hudson Yards — the honeycomb all lit up against the cold.",
+    date: "2025-12-25",
+    album: "Travel",
   },
-  "tahoe-blue-morning.webp": {
-    title: "Blue Morning Hike",
-    description: "Clear skies, easy trail, no one else around. The good kind of quiet.",
-    date: "2026-03-21",
-    album: "Adventures",
+  "sunflower-field-chainat-2015.jpg": {
+    title: "Sunflower Fields, Chainat",
+    description: "Endless sunflowers in Chainat, Thailand. Golden hour, golden everything.",
+    date: "2015-12-05",
+    album: "Travel",
+  },
+  // Duke
+  "duke-gardens-winter-2025.jpg": {
+    title: "Duke Gardens in Winter",
+    description: "Sarah P. Duke Gardens, stripped back and quiet in the cold.",
+    date: "2025-01-18",
+    album: "Duke",
+  },
+  "duke-university-spring-2026.jpg": {
+    title: "Duke in Spring",
+    description: "Gothic stone and fresh green — campus at its best.",
+    date: "2026-04-02",
+    album: "Duke",
+  },
+  // Memes
+  "drool-cat-meme.jpeg": {
+    title: "Drool Cat",
+    description: "No thoughts. Just drool.",
+    album: "Memes",
+  },
+  "uia-cat-meme.jpeg": {
+    title: "Uia Cat",
+    description: "uia.",
+    album: "Memes",
+  },
+  "rigby-cat.png": {
+    title: "Rigby",
+    description: "Certified little menace.",
+    album: "Memes",
+  },
+  "larry-lick-your-toes.gif": {
+    title: "Larry",
+    description: "Let's just say Larry will lick your toes tonight.",
+    album: "Memes",
+  },
+  "salmon-wanted-to-fight-2023.jpg": {
+    title: "Salmon Wanted to Fight",
+    description: "2023. Salmon picked a fight. Salmon lost.",
+    date: "2023-06-01",
+    album: "Memes",
+  },
+  // Games
+  "zelda-botw.jpg": {
+    title: "Breath of the Wild",
+    description: "All-time best game. Mipha best girl.",
+    album: "Games",
     liked: true,
-  },
-  "mint-hills-daydream.webp": {
-    title: "Mint Daydream",
-    description: "Not sure this is a real place, but it should be.",
-    date: "2026-05-09",
-    album: "Adventures",
   },
 };

@@ -3,7 +3,7 @@ import { profile } from "../data/profile";
 import { useSettings, wallpaperUrl } from "../state/settings";
 import { useIsMobile } from "../state/useIsMobile";
 
-const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" });
+const fmtTime = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", hour12: false });
 const fmtDate = new Intl.DateTimeFormat("en-US", { weekday: "long", month: "long", day: "numeric" });
 
 const MAX_DRAG = 260; // cap the upward translate (px)

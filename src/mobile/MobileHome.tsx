@@ -24,7 +24,7 @@ export default function MobileHome({ onOpen }: { onOpen: (app: AppDef) => void }
             onClick={() => onOpen(app)}
             className="flex flex-col items-center gap-1.5 transition-transform duration-150 ease-out active:scale-90"
           >
-            <span className="grid h-[60px] w-[60px] place-items-center">{app.icon}</span>
+            <span className="grid h-[66px] w-[66px] place-items-center">{app.icon}</span>
             <span className="max-w-full truncate text-[11px] font-medium leading-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.55)]">
               {app.mobileTitle ?? app.title}
             </span>
