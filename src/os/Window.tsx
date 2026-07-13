@@ -108,7 +108,7 @@ export default function WindowFrame({
       >
         {/* Title bar */}
         <div
-          className="window-drag-handle glass-thin relative flex h-11 shrink-0 cursor-default items-center px-3"
+          className="window-drag-handle glass-thin relative flex h-9 shrink-0 cursor-default items-center px-3"
           onDoubleClick={() => toggleMaximize(id)}
         >
           <div className="group flex items-center gap-2">

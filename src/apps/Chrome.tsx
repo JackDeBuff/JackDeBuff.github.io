@@ -71,39 +71,75 @@ export default function Chrome() {
   return (
     <div className="flex h-full flex-col bg-zinc-800">
       {/* Toolbar */}
-      <div className="glass-thin flex items-center gap-2 px-3 py-2">
-        <button onClick={() => nav(-1)} disabled={idx === 0} className="text-lg text-zinc-300 disabled:text-zinc-600">
-          ←
+      <div className="glass-thin flex items-center gap-1 px-2.5 py-1.5">
+        <button
+          aria-label="Back"
+          onClick={() => nav(-1)}
+          disabled={idx === 0}
+          className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-zinc-600 transition hover:bg-black/[0.06] disabled:opacity-30 disabled:hover:bg-transparent dark:text-zinc-300 dark:hover:bg-white/10"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="m15 6-6 6 6 6" />
+          </svg>
         </button>
-        <button onClick={() => nav(1)} disabled={idx >= stack.length - 1} className="text-lg text-zinc-300 disabled:text-zinc-600">
-          →
+        <button
+          aria-label="Forward"
+          onClick={() => nav(1)}
+          disabled={idx >= stack.length - 1}
+          className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-zinc-600 transition hover:bg-black/[0.06] disabled:opacity-30 disabled:hover:bg-transparent dark:text-zinc-300 dark:hover:bg-white/10"
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="m9 6 6 6-6 6" />
+          </svg>
         </button>
-        <button onClick={() => setFrameKey((k) => k + 1)} className="text-base text-zinc-300">
-          ⟳
+        <button
+          aria-label="Reload"
+          onClick={() => setFrameKey((k) => k + 1)}
+          className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-zinc-600 transition hover:bg-black/[0.06] dark:text-zinc-300 dark:hover:bg-white/10"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M23 4v6h-6" />
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+          </svg>
         </button>
         <form
-          className="flex-1"
+          className="flex min-w-0 flex-1 justify-center px-1"
           onSubmit={(e) => {
             e.preventDefault();
             go(address);
           }}
         >
-          <input
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            onFocus={(e) => e.target.select()}
-            className="w-full rounded-full bg-black/30 px-4 py-1.5 text-[13px] text-zinc-100 outline-none ring-1 ring-white/10 focus:ring-blue-500"
-            spellCheck={false}
-          />
+          <div className="relative flex w-full max-w-xl items-center">
+            <svg
+              aria-hidden
+              className="pointer-events-none absolute left-3 text-zinc-400 dark:text-zinc-500"
+              width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round"
+            >
+              <rect x="4" y="11" width="16" height="10" rx="2" />
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+            </svg>
+            <input
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              onFocus={(e) => e.target.select()}
+              className="w-full rounded-[9px] bg-black/[0.05] py-1 pl-8 pr-3 text-[13px] font-medium text-zinc-700 outline-none ring-1 ring-transparent transition placeholder:text-zinc-400 focus:bg-black/[0.08] focus:ring-blue-500/60 dark:bg-white/[0.08] dark:text-zinc-100 dark:focus:bg-white/[0.12]"
+              spellCheck={false}
+            />
+          </div>
         </form>
         <a
           href={current}
           target="_blank"
           rel="noopener"
           title="Open in a real tab"
-          className="text-sm text-zinc-300 hover:text-white"
+          aria-label="Open in a real tab"
+          className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-zinc-600 transition hover:bg-black/[0.06] hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-white/10 dark:hover:text-white"
         >
-          ↗
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <path d="M15 3h6v6" />
+            <path d="M10 14 21 3" />
+          </svg>
         </a>
       </div>
       {/* Bookmarks bar */}

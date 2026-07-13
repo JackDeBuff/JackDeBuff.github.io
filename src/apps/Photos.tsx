@@ -80,10 +80,13 @@ function HeartButton({
   liked,
   onToggle,
   className = "",
+  idle = "text-white/90 hover:text-white",
 }: {
   liked: boolean;
   onToggle: () => void;
   className?: string;
+  /** Colour for the un-liked (outline) state — override where the backdrop isn't dark. */
+  idle?: string;
 }) {
   return (
     <button
@@ -93,7 +96,7 @@ function HeartButton({
       }}
       aria-label={liked ? "Remove from Favorites" : "Add to Favorites"}
       className={`grid place-items-center rounded-full transition ${
-        liked ? "text-red-500" : "text-white/90 hover:text-white"
+        liked ? "text-red-500" : idle
       } ${className}`}
     >
       <svg
@@ -436,7 +439,7 @@ function Lightbox({
             onPrev();
           }}
           aria-label="Previous photo"
-          className="glass absolute left-4 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-white/90 hover:text-white"
+          className="glass absolute left-4 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-zinc-700 hover:text-zinc-900 dark:text-white/90 dark:hover:text-white"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <path d="m15 6-6 6 6 6" />
@@ -450,7 +453,7 @@ function Lightbox({
             onNext();
           }}
           aria-label="Next photo"
-          className="glass absolute right-4 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-white/90 hover:text-white"
+          className="glass absolute right-4 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-zinc-700 hover:text-zinc-900 dark:text-white/90 dark:hover:text-white"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <path d="m9 6 6 6-6 6" />
@@ -461,20 +464,25 @@ function Lightbox({
       {/* glass info panel */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="glass w-full max-w-md rounded-2xl px-5 py-3 text-white"
+        className="glass w-full max-w-md rounded-2xl px-5 py-3 text-zinc-900 dark:text-white"
       >
         <div className="flex items-start gap-3">
           <div className="min-w-0 flex-1">
             <h2 className="truncate text-[15px] font-semibold">{titleOf(photo)}</h2>
-            {desc && <p className="mt-0.5 text-[13px] leading-snug text-white/70">{desc}</p>}
-            {date && <p className="mt-1 text-[11px] text-white/50">{date}</p>}
+            {desc && <p className="mt-0.5 text-[13px] leading-snug text-zinc-600 dark:text-white/70">{desc}</p>}
+            {date && <p className="mt-1 text-[11px] text-zinc-500 dark:text-white/50">{date}</p>}
           </div>
-          <HeartButton liked={liked} onToggle={onToggleLike} className="mt-0.5 shrink-0" />
+          <HeartButton
+            liked={liked}
+            onToggle={onToggleLike}
+            idle="text-zinc-500 hover:text-zinc-800 dark:text-white/90 dark:hover:text-white"
+            className="mt-0.5 shrink-0"
+          />
         </div>
         <div className="mt-3 flex justify-end">
           <button
             onClick={onClose}
-            className="rounded-full bg-white/15 px-4 py-1 text-[13px] font-medium text-white transition hover:bg-white/25"
+            className="rounded-full bg-black/[0.08] px-4 py-1 text-[13px] font-medium text-zinc-800 transition hover:bg-black/[0.12] dark:bg-white/15 dark:text-white dark:hover:bg-white/25"
           >
             Done
           </button>
