@@ -149,17 +149,44 @@ export default function YouTubeMusic() {
         </aside>
       </div>
 
-      {/* Player bar */}
-      <div className="flex items-center gap-4 border-t border-white/10 px-4 py-2 text-zinc-400">
-        <button onClick={() => playerRef.current?.previousVideo?.()} className="text-lg hover:text-white">⏮</button>
+      {/* Player bar — SVG glyphs (unicode ⏮▶⏭ render as blue emoji on iOS).
+          Extra bottom padding on mobile keeps controls clear of the sheet's
+          home-indicator tap area. */}
+      <div className="flex items-center gap-5 border-t border-white/10 px-4 py-2 text-zinc-300 max-md:pb-7">
         <button
-          onClick={() => (playing ? playerRef.current?.pauseVideo?.() : playerRef.current?.playVideo?.())}
-          className="text-2xl text-white"
+          aria-label="Previous"
+          onClick={() => playerRef.current?.previousVideo?.()}
+          className="transition-colors hover:text-white"
         >
-          {playing ? "⏸" : "▶"}
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+            <path d="M6 6h2v12H6zM20 6v12l-10-6z" />
+          </svg>
         </button>
-        <button onClick={() => playerRef.current?.nextVideo?.()} className="text-lg hover:text-white">⏭</button>
-        <span className="ml-auto line-clamp-1 text-xs">
+        <button
+          aria-label={playing ? "Pause" : "Play"}
+          onClick={() => (playing ? playerRef.current?.pauseVideo?.() : playerRef.current?.playVideo?.())}
+          className="text-white"
+        >
+          {playing ? (
+            <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
+              <path d="M7 5h4v14H7zM13 5h4v14h-4z" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
+              <path d="M8 5l12 7-12 7z" />
+            </svg>
+          )}
+        </button>
+        <button
+          aria-label="Next"
+          onClick={() => playerRef.current?.nextVideo?.()}
+          className="transition-colors hover:text-white"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+            <path d="M16 6h2v12h-2zM4 6v12l10-6z" />
+          </svg>
+        </button>
+        <span className="ml-auto line-clamp-1 text-xs text-zinc-400">
           {tracks[current]?.title ?? "JackDeBuff · playlist"}
         </span>
       </div>

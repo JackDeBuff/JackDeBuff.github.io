@@ -1,7 +1,7 @@
 import type { ComponentType, ReactNode } from "react";
 import {
   NotesIcon,
-  ChromeIcon,
+  SafariIcon,
   GithubIcon,
   LinkedinIcon,
   MusicIcon,
@@ -20,6 +20,8 @@ import { profile } from "../data/profile";
 export interface AppDef {
   id: string;
   title: string;
+  /** Shorter label for the mobile home-screen grid (e.g. "Settings"). */
+  mobileTitle?: string;
   icon: ReactNode;
   dock: boolean;
   desktop: boolean;
@@ -41,9 +43,9 @@ export const apps: AppDef[] = [
     defaultPosition: { x: 120, y: 80 },
   },
   {
-    id: "chrome",
-    title: "Google Chrome",
-    icon: <ChromeIcon />,
+    id: "chrome", // id kept for Terminal's `open chrome` + persisted window state
+    title: "Safari",
+    icon: <SafariIcon />,
     dock: true,
     desktop: true,
     component: Chrome,
@@ -83,6 +85,7 @@ export const apps: AppDef[] = [
   {
     id: "settings",
     title: "System Settings",
+    mobileTitle: "Settings",
     icon: <SettingsIcon />,
     dock: true,
     desktop: false,

@@ -3,9 +3,8 @@ import type { AppDef } from "../apps/apps.config";
 
 /**
  * Apps whose own UI is a full-bleed dark surface (their own black header/chrome).
- * For these we drop the redundant light title bar and give the sheet a near-black
- * background so the status-bar spacer blends into the app — it feels native rather
- * than like an app boxed inside a light sheet.
+ * For these the sheet background goes near-black so the status-bar spacer blends
+ * into the app, and the status bar switches to white text.
  */
 export const BARE_DARK_APPS = new Set(["music", "terminal"]);
 
@@ -43,12 +42,8 @@ export default function MobileAppSheet({
         style={{ height: "calc(env(safe-area-inset-top) + 44px)" }}
       />
 
-      {/* Thin app title bar — dropped for bare dark apps that carry their own chrome */}
-      {!bare && (
-        <div className="flex h-11 shrink-0 items-center justify-center border-b border-black/10 px-4 text-[15px] font-semibold text-zinc-800 dark:border-white/10 dark:text-zinc-100">
-          <span className="truncate">{app.title}</span>
-        </div>
-      )}
+      {/* No sheet title bar — every app carries its own header (real iOS apps
+          don't get a system chrome strip either). */}
 
       {/* App content */}
       <div className="min-h-0 flex-1 overflow-hidden">
@@ -65,7 +60,7 @@ export default function MobileAppSheet({
       <button
         aria-label="Close app"
         onClick={() => setClosing(true)}
-        className="absolute inset-x-0 bottom-0 z-10 flex h-8 items-end justify-center mix-blend-difference"
+        className="absolute bottom-0 left-1/2 z-10 flex h-7 w-48 -translate-x-1/2 items-end justify-center mix-blend-difference"
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 8px)" }}
       >
         <span className="h-[5px] w-32 rounded-full bg-white" />

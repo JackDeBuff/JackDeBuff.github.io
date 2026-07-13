@@ -47,7 +47,7 @@ export default function Terminal() {
   const promptStr = `jack@macbook ${cwd.length ? "~/" + cwd.join("/") : "~"} %`;
 
   const COMMANDS = ["ls", "cd", "cat", "pwd", "open", "clear", "help", "whoami", "date", "echo", "neofetch"];
-  const APPS = ["about", "chrome", "music", "settings", "terminal", "github", "linkedin"];
+  const APPS = ["about", "safari", "chrome", "music", "photos", "settings", "terminal", "github", "linkedin"];
 
   /** Tab-completion: first word → commands; `open` → app names; otherwise → entries in cwd. */
   function complete(raw: string): string | null {
@@ -102,7 +102,7 @@ export default function Terminal() {
         print("  cat <file>    read a file         pwd        print directory");
         print("  open <app>    open an app         clear      clear screen");
         print("  whoami · date · echo · neofetch");
-        print("Apps: about, chrome, music, settings, github, linkedin");
+        print("Apps: about, safari, photos, music, settings, github, linkedin");
         break;
       case "ls": {
         const node = resolve(cwd, HOME);
@@ -144,7 +144,8 @@ export default function Terminal() {
         const app = (args[0] ?? "").toLowerCase();
         if (app === "github") window.open(profile.github, "_blank", "noopener");
         else if (app === "linkedin") window.open(profile.linkedin, "_blank", "noopener");
-        else if (["about", "chrome", "music", "settings", "terminal"].includes(app)) openWindow(app);
+        else if (app === "safari") openWindow("chrome"); // Safari app keeps the legacy id
+        else if (["about", "chrome", "music", "photos", "settings", "terminal"].includes(app)) openWindow(app);
         else print(`open: unknown app: ${args[0] ?? ""}`);
         break;
       }

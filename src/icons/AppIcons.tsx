@@ -3,6 +3,7 @@ import notesIcon from "./app-icons/notes.webp";
 import terminalIcon from "./app-icons/terminal.webp";
 import settingsIcon from "./app-icons/settings.webp";
 import photosIcon from "./app-icons/photos.webp";
+import safariIcon from "./app-icons/safari.webp";
 
 /**
  * App icons: real macOS-style icon images (downscaled WebP, adapted from the
@@ -79,19 +80,9 @@ export function NotesIcon() {
   return <AppIconImg src={notesIcon} alt="Notes" />;
 }
 
-export function ChromeIcon() {
-  return (
-    <Squircle id="chrome" gradient={["#f4f4f5", "#d4d4d8"]}>
-      <g transform="translate(50 50)">
-        <circle r="32" fill="#fff" />
-        <path d="M0 -32 A32 32 0 0 1 27.7 16 L11.4 6.6 A13.2 13.2 0 0 0 0 -13.2 Z" fill="#EA4335" />
-        <path d="M0 -32 A32 32 0 0 1 27.7 16 L11.4 6.6 A13.2 13.2 0 0 0 0 -13.2 Z" fill="#4285F4" transform="rotate(120)" />
-        <path d="M0 -32 A32 32 0 0 1 27.7 16 L11.4 6.6 A13.2 13.2 0 0 0 0 -13.2 Z" fill="#FBBC05" transform="rotate(240)" />
-        <circle r="13.2" fill="#fff" />
-        <circle r="10.4" fill="#4285F4" />
-      </g>
-    </Squircle>
-  );
+/** Safari — real macOS compass icon (bitmap, same source repo). */
+export function SafariIcon() {
+  return <AppIconImg src={safariIcon} alt="Safari" />;
 }
 
 export function TerminalIcon() {
