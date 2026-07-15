@@ -8,6 +8,13 @@ import type { AppDef } from "../apps/apps.config";
  */
 export const BARE_DARK_APPS = new Set(["music", "terminal"]);
 
+/**
+ * Apps whose content is too busy/variable for the mix-blend home bar to read
+ * against (e.g. Maps' tiles). These get a solid white bar with a soft dark
+ * shadow instead, so it stays visible over any map in light or dark.
+ */
+const BUSY_CONTENT_APPS = new Set(["maps"]);
+
 const MAX_DRAG = 320; // cap the upward translate (px)
 const CLOSE_THRESHOLD = 90; // release past this (px up) to close
 const TAP_SLOP = 8; // moves under this count as a tap, not a drag
@@ -29,6 +36,7 @@ export default function MobileAppSheet({
 }) {
   const AppView = app.component!;
   const bare = BARE_DARK_APPS.has(app.id);
+  const busy = BUSY_CONTENT_APPS.has(app.id);
 
   const [dragY, setDragY] = useState(0); // <= 0 while dragging up
   const [dragging, setDragging] = useState(false);
@@ -133,8 +141,10 @@ export default function MobileAppSheet({
       {/* No sheet title bar — every app carries its own header (real iOS apps
           don't get a system chrome strip either). */}
 
-      {/* App content */}
-      <div className="min-h-0 flex-1 overflow-hidden">
+      {/* App content — `isolate` keeps app-internal z-indexes (e.g. Leaflet's
+          panes/controls, which climb to z-1000) contained so they can't paint
+          over the home indicator below. */}
+      <div className="isolate min-h-0 flex-1 overflow-hidden">
         <AppView />
       </div>
 
@@ -147,10 +157,16 @@ export default function MobileAppSheet({
       <button
         ref={indicatorRef}
         aria-label="Close app"
-        className="absolute bottom-0 left-1/2 z-10 flex h-7 w-48 -translate-x-1/2 touch-none items-end justify-center mix-blend-difference"
+        className={`absolute bottom-0 left-1/2 z-20 flex h-7 w-48 -translate-x-1/2 touch-none items-end justify-center ${
+          busy ? "" : "mix-blend-difference"
+        }`}
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 8px)" }}
       >
-        <span className="h-[5px] w-32 rounded-full bg-white" />
+        <span
+          className={`h-[5px] w-32 rounded-full bg-white ${
+            busy ? "shadow-[0_0_3px_1px_rgba(0,0,0,0.55)]" : ""
+          }`}
+        />
       </button>
     </div>
   );

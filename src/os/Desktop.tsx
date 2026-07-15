@@ -4,6 +4,7 @@ import Dock from "./Dock";
 import DesktopIcon from "./DesktopIcon";
 import WindowFrame from "./Window";
 import AboutThisMac from "./AboutThisMac";
+import SalmonPet from "./SalmonPet";
 import { apps } from "../apps/apps.config";
 import { useWindows } from "../state/windows";
 import { useSettings, wallpaperUrl } from "../state/settings";
@@ -36,6 +37,9 @@ export default function Desktop({ onLock, onRestart }: { onLock: () => void; onR
             />
           ))}
       </div>
+
+      {/* Salmon the cat lives on the desktop surface (below windows) */}
+      <SalmonPet />
 
       {/* Window layer — pointer-events-none so the empty layer never blocks the desktop */}
       <div className="pointer-events-none absolute inset-0">

@@ -27,8 +27,57 @@ const NEOFETCH = String.raw`
  :________.` + "`" + String.raw`:      Host: MacBook Pro (Portfolio Edition)
  :_______:  :      Role: ${"Data Scientist · ML @ Duke"}
   :_______` + "`" + String.raw`-;      Papers: 2 IEEE · Citations: 35+
-   ` + "`" + String.raw`._.-._.'       Loves: AI, Finance, Cats, Memes
+   ` + "`" + String.raw`._.-._.'       Loves: AI, Investing, Real Madrid, Salmon 🐟
 `;
+
+/* ── Easter-egg command payloads (public copy — keep honest, brief, funny) ── */
+const STORY = [
+  "jack --story",
+  "",
+  "  2000  born in Samut Prakan, an only child.",
+  "  2009  Assumption College Samut Prakan — first found I was good at math & science.",
+  "  2013  got into Suankularb — one of Thailand's 'big four' all-boys schools.",
+  "  2016  got into MWIT — Thailand's toughest science school — as the",
+  "        very last name on the reserve list.",
+  "  2018  Intel ISEF finalist: turning brainwaves into passwords.",
+  "  2019  ~2 years of losing almost every contest and internship I tried.",
+  "  2021  finally won my first hackathon. Then a few more.",
+  "  2023  landed a KBTG scholarship before graduating — 2 of hundreds —",
+  "        then two straight years of awards.",
+  "  2025  flew to Duke on a scholarship. Cooked my first real meal,",
+  "        made my first international friends.",
+  "   now  gaming by day, inventing by night, one cat named Salmon.",
+  "",
+  "  tip: try `git log`, `salmon`, or `open stocks`.",
+];
+
+const GITLOG = [
+  "* a1b2c3d (HEAD -> me) enjoying my life while it lasts",
+  "* 9f8e7d6 cook, clean, survive at Duke",
+  "* 7c6b5a4 find a roommate, make new friends",
+  "* 5a4b3c2 fly alone for the first time",
+  "* 3d2e1f0 eat out every day with mom and dad before leaving",
+  "* 1a2b3c4 so excited and proud that I got into Duke",
+  "* 0000000 the waiting was so long — I thought no one would accept me 😔",
+];
+
+const SALMON = String.raw`
+   /\_/\     Salmon
+  ( o.o )    since January 2019 · ~7 human years
+   > ^ <     status: still wants to fight
+`;
+
+const SECRET = [
+  "psst — you found the secret. 🤫",
+  "",
+  "My real nickname is Earth (เอิร์ธ).",
+  "But in middle school I was... deeply chuunibyou. My friends and I",
+  "started calling each other absurd names, and mine was:",
+  "",
+  '  "Jack De Buffalolarity Dark Flame Master Gelson Unzus the Excalibur"',
+  "",
+  "Somehow only 'Jack' stuck — and that's where JackDeBuff comes from.",
+];
 
 export default function Terminal() {
   const [lines, setLines] = useState<Line[]>([
@@ -46,8 +95,9 @@ export default function Terminal() {
 
   const promptStr = `jack@macbook ${cwd.length ? "~/" + cwd.join("/") : "~"} %`;
 
-  const COMMANDS = ["ls", "cd", "cat", "pwd", "open", "clear", "help", "whoami", "date", "echo", "neofetch"];
-  const APPS = ["about", "safari", "chrome", "music", "photos", "settings", "terminal", "github", "linkedin"];
+  // `secret` is intentionally left out of help — but stays tab-completable as a breadcrumb.
+  const COMMANDS = ["ls", "cd", "cat", "pwd", "open", "clear", "help", "whoami", "date", "echo", "neofetch", "story", "git", "salmon", "secret"];
+  const APPS = ["about", "safari", "chrome", "music", "photos", "stocks", "maps", "lineup", "trash", "settings", "terminal", "github", "linkedin"];
 
   /** Tab-completion: first word → commands; `open` → app names; otherwise → entries in cwd. */
   function complete(raw: string): string | null {
@@ -101,8 +151,10 @@ export default function Terminal() {
         print("  ls            list files          cd <dir>   change directory");
         print("  cat <file>    read a file         pwd        print directory");
         print("  open <app>    open an app         clear      clear screen");
-        print("  whoami · date · echo · neofetch");
-        print("Apps: about, safari, photos, music, settings, github, linkedin");
+        print("  story         how I got here      git log    my life, as commits");
+        print("  salmon        meet the cat        neofetch   system info");
+        print("  whoami · date · echo");
+        print("Apps: about, safari, photos, music, stocks, maps, settings, github, linkedin");
         break;
       case "ls": {
         const node = resolve(cwd, HOME);
@@ -145,7 +197,7 @@ export default function Terminal() {
         if (app === "github") window.open(profile.github, "_blank", "noopener");
         else if (app === "linkedin") window.open(profile.linkedin, "_blank", "noopener");
         else if (app === "safari") openWindow("chrome"); // Safari app keeps the legacy id
-        else if (["about", "chrome", "music", "photos", "settings", "terminal"].includes(app)) openWindow(app);
+        else if (["about", "chrome", "music", "photos", "stocks", "maps", "lineup", "trash", "settings", "terminal"].includes(app)) openWindow(app);
         else print(`open: unknown app: ${args[0] ?? ""}`);
         break;
       }
@@ -160,6 +212,20 @@ export default function Terminal() {
         break;
       case "neofetch":
         NEOFETCH.split("\n").forEach(print);
+        break;
+      case "story":
+        STORY.forEach(print);
+        break;
+      case "git":
+        if (args[0] === "log") GITLOG.forEach(print);
+        else if (!args.length) print("usage: git log");
+        else print(`git: '${args.join(" ")}' is not tracked here. try: git log`);
+        break;
+      case "salmon":
+        SALMON.split("\n").forEach(print);
+        break;
+      case "secret":
+        SECRET.forEach(print);
         break;
       case "clear":
         setLines([]);

@@ -8,6 +8,10 @@ import {
   PhotosIcon,
   SettingsIcon,
   TerminalIcon,
+  StocksIcon,
+  MapsIcon,
+  TrashIcon,
+  LineupIcon,
 } from "../icons/AppIcons";
 import Notes from "./Notes";
 import Chrome from "./Chrome";
@@ -15,6 +19,10 @@ import Photos from "./Photos";
 import Terminal from "./Terminal";
 import Settings from "./Settings";
 import YouTubeMusic from "./YouTubeMusic";
+import Stocks from "./Stocks";
+import Maps from "./Maps";
+import Trash from "./Trash";
+import Lineup from "./Lineup";
 import { profile } from "../data/profile";
 
 export interface AppDef {
@@ -71,6 +79,47 @@ export const apps: AppDef[] = [
     component: Terminal,
     defaultSize: { width: 680, height: 440 },
     defaultPosition: { x: 300, y: 160 },
+  },
+  {
+    id: "maps",
+    title: "Maps",
+    icon: <MapsIcon />,
+    dock: false,
+    desktop: true,
+    component: Maps,
+    defaultSize: { width: 940, height: 620 },
+    defaultPosition: { x: 150, y: 60 },
+  },
+  {
+    id: "stocks",
+    title: "Stocks",
+    icon: <StocksIcon />,
+    dock: false,
+    desktop: true,
+    component: Stocks,
+    defaultSize: { width: 560, height: 640 },
+    defaultPosition: { x: 380, y: 80 },
+  },
+  {
+    id: "lineup",
+    title: "FootMob",
+    mobileTitle: "FootMob",
+    icon: <LineupIcon />,
+    dock: false,
+    desktop: true,
+    component: Lineup,
+    defaultSize: { width: 560, height: 640 },
+    defaultPosition: { x: 300, y: 70 },
+  },
+  {
+    id: "trash",
+    title: "Trash",
+    icon: <TrashIcon />,
+    dock: false,
+    desktop: true,
+    component: Trash,
+    defaultSize: { width: 560, height: 560 },
+    defaultPosition: { x: 260, y: 100 },
   },
   {
     id: "music",

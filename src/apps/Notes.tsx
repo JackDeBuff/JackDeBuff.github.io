@@ -1,6 +1,38 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { profile } from "../data/profile";
 import { useIsMobile } from "../state/useIsMobile";
+
+/* Rotating status one-liner — cycles Jack's taglines with a soft cross-fade.
+   Honors prefers-reduced-motion by simply swapping without the fade cadence. */
+function RotatingTagline() {
+  const lines = profile.taglines;
+  const [idx, setIdx] = useState(0);
+  const [shown, setShown] = useState(true);
+
+  useEffect(() => {
+    if (lines.length < 2) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const hold = reduce ? 6000 : 5200;
+    const t = setInterval(() => {
+      setShown(false);
+      setTimeout(() => {
+        setIdx((i) => (i + 1) % lines.length);
+        setShown(true);
+      }, reduce ? 0 : 400);
+    }, hold);
+    return () => clearInterval(t);
+  }, [lines.length]);
+
+  return (
+    <p
+      className="min-h-[2.4em] text-[13px] italic text-zinc-500 transition-opacity duration-[400ms] dark:text-zinc-400"
+      style={{ opacity: shown ? 1 : 0 }}
+      aria-live="polite"
+    >
+      {lines[idx]}
+    </p>
+  );
+}
 
 /* ────────────────────────────────────────────────────────────────────────────
    Jack's Notes — an Apple-Notes-style app whose notes are Jack's portfolio.
@@ -51,7 +83,7 @@ function AboutBody() {
           </span>
         ))}
       </div>
-      <p className="text-[13px] italic text-zinc-500 dark:text-zinc-400">{profile.tagline}</p>
+      <RotatingTagline />
     </div>
   );
 }

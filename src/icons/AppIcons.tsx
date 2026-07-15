@@ -4,6 +4,7 @@ import terminalIcon from "./app-icons/terminal.webp";
 import settingsIcon from "./app-icons/settings.webp";
 import photosIcon from "./app-icons/photos.webp";
 import safariIcon from "./app-icons/safari.webp";
+import trashIcon from "./app-icons/trash.webp";
 
 /**
  * App icons: real macOS-style icon images (downscaled WebP, adapted from the
@@ -105,6 +106,64 @@ export function MusicIcon() {
       <circle cx="50" cy="50" r="30" fill="#FF0000" />
       <circle cx="50" cy="50" r="20" fill="none" stroke="#fff" strokeWidth="4" />
       <path d="M45 40 L64 50 L45 60 Z" fill="#fff" />
+    </Squircle>
+  );
+}
+
+/** Stocks — black tile with a rising green line chart, like macOS Stocks. */
+export function StocksIcon() {
+  return (
+    <Squircle id="stk" gradient={["#2b2b2d", "#0a0a0b"]}>
+      {/* faint gridline */}
+      <line x1="24" y1="64" x2="78" y2="64" stroke="#fff" strokeOpacity="0.14" strokeWidth="2" />
+      {/* rising chart line */}
+      <path
+        d="M24 62 L38 52 L50 57 L64 38 L76 28"
+        fill="none"
+        stroke="#30d158"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* arrow head */}
+      <path d="M76 28 L67 30 M76 28 L74 37" fill="none" stroke="#30d158" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    </Squircle>
+  );
+}
+
+/** Maps — pale map tile with roads and a red location pin. */
+export function MapsIcon() {
+  return (
+    <Squircle id="map" gradient={["#e9f1df", "#cfe6c5"]}>
+      {/* water corner */}
+      <path d="M66 90 L90 90 L90 62 Z" fill="#a9d8ef" />
+      {/* roads */}
+      <path d="M18 40 Q46 30 92 52" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
+      <path d="M34 92 Q40 56 70 20" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
+      <path d="M18 40 Q46 30 92 52" fill="none" stroke="#e2b34d" strokeWidth="2.5" strokeLinecap="round" />
+      {/* location pin */}
+      <g transform="translate(50 44)">
+        <path d="M0 -16 C9 -16 15 -9 15 -1 C15 9 4 16 0 24 C-4 16 -15 9 -15 -1 C-15 -9 -9 -16 0 -16 Z" fill="#ff3b30" />
+        <circle cx="0" cy="-1" r="5.5" fill="#fff" />
+      </g>
+    </Squircle>
+  );
+}
+
+/** Trash — real macOS-style metallic bin bitmap (aakash icon set). */
+export function TrashIcon() {
+  return <AppIconImg src={trashIcon} alt="Trash" />;
+}
+
+/** Lineup — green pitch squircle with a football. */
+export function LineupIcon() {
+  return (
+    <Squircle id="xi" gradient={["#2fa552", "#1b7a38"]}>
+      <rect x="24" y="24" width="52" height="52" rx="4" fill="none" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" />
+      <line x1="24" y1="50" x2="76" y2="50" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" />
+      <circle cx="50" cy="50" r="10" fill="none" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" />
+      <circle cx="50" cy="50" r="7" fill="#fff" />
+      <path d="M50 46 l3.3 2.4 -1.3 3.9 h-4 l-1.3 -3.9 z" fill="#1b7a38" />
     </Squircle>
   );
 }

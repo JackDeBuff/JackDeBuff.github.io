@@ -458,3 +458,34 @@ body {
 .lock-home-indicator {
   animation: lock-nudge 1.9s var(--ease-out-quint) infinite;
 }
+
+/* ── Salmon the desktop cat ─────────────────────────────────────────────── */
+@keyframes salmon-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+@keyframes salmon-sway {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(10deg); }
+}
+@keyframes salmon-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+@keyframes salmon-zfloat {
+  0% { transform: translateY(2px); opacity: 0; }
+  40% { opacity: 0.9; }
+  100% { transform: translateY(-6px); opacity: 0; }
+}
+@keyframes salmon-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.salmon-pop { animation: salmon-pop 0.22s var(--ease-out-quint) both; }
+@media (prefers-reduced-motion: no-preference) {
+  .salmon-walk { animation: salmon-bob 0.45s ease-in-out infinite; }
+  .salmon-tail { animation: salmon-sway 2.6s ease-in-out infinite; transform-box: fill-box; }
+  .salmon-eye { animation: salmon-blink 5.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .salmon-z { animation: salmon-zfloat 2.4s ease-in-out infinite; }
+}

@@ -3,7 +3,11 @@ export const profile = {
   nickname: "Jack",
   handle: "JackDeBuff",
   title: "Data Scientist · Machine Learning @ Duke University",
-  tagline: "AI · Finance · Cat Enthusiast · Meme & Reels enjoyer",
+  /** Rotating status one-liners — Jack's own rap-cadence jokes. Add freely. */
+  taglines: [
+    "AI is cool, but the AC in my room is cooler — even my cat hates it and chooses to sleep in the washer.",
+    "Part-time investor — just lost $2,000 because of Madrid.",
+  ],
   location: "Durham, NC 🇺🇸 · est. Bangkok 🇹🇭",
   email: "supawich@gmail.com",
   github: "https://github.com/JackDeBuff",
