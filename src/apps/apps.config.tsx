@@ -45,7 +45,7 @@ export const apps: AppDef[] = [
     title: "Notes",
     icon: <NotesIcon />,
     dock: true,
-    desktop: true,
+    desktop: false, // already in the dock; keep the desktop uncluttered
     component: Notes,
     defaultSize: { width: 900, height: 600 },
     defaultPosition: { x: 120, y: 80 },
@@ -55,7 +55,7 @@ export const apps: AppDef[] = [
     title: "Safari",
     icon: <SafariIcon />,
     dock: true,
-    desktop: true,
+    desktop: false, // already in the dock; keep the desktop uncluttered
     component: Chrome,
     defaultSize: { width: 960, height: 620 },
     defaultPosition: { x: 200, y: 60 },
@@ -65,7 +65,7 @@ export const apps: AppDef[] = [
     title: "Photos",
     icon: <PhotosIcon />,
     dock: true,
-    desktop: true,
+    desktop: false, // already in the dock; keep the desktop uncluttered
     component: Photos,
     defaultSize: { width: 980, height: 640 },
     defaultPosition: { x: 160, y: 70 },

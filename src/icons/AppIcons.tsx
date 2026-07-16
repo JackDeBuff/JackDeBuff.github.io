@@ -5,6 +5,10 @@ import settingsIcon from "./app-icons/settings.webp";
 import photosIcon from "./app-icons/photos.webp";
 import safariIcon from "./app-icons/safari.webp";
 import trashIcon from "./app-icons/trash.webp";
+import stocksIcon from "./app-icons/stocks.webp";
+import mapsIcon from "./app-icons/maps.webp";
+import githubIcon from "./app-icons/github.webp";
+import footmobIcon from "./app-icons/footmob.webp";
 
 /**
  * App icons: real macOS-style icon images (downscaled WebP, adapted from the
@@ -110,44 +114,14 @@ export function MusicIcon() {
   );
 }
 
-/** Stocks — black tile with a rising green line chart, like macOS Stocks. */
+/** Stocks — real macOS Stocks icon (bitmap, macosicons.com). */
 export function StocksIcon() {
-  return (
-    <Squircle id="stk" gradient={["#2b2b2d", "#0a0a0b"]}>
-      {/* faint gridline */}
-      <line x1="24" y1="64" x2="78" y2="64" stroke="#fff" strokeOpacity="0.14" strokeWidth="2" />
-      {/* rising chart line */}
-      <path
-        d="M24 62 L38 52 L50 57 L64 38 L76 28"
-        fill="none"
-        stroke="#30d158"
-        strokeWidth="5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* arrow head */}
-      <path d="M76 28 L67 30 M76 28 L74 37" fill="none" stroke="#30d158" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-    </Squircle>
-  );
+  return <AppIconImg src={stocksIcon} alt="Stocks" />;
 }
 
-/** Maps — pale map tile with roads and a red location pin. */
+/** Maps — real macOS Tahoe Maps icon (bitmap, macosicons.com). */
 export function MapsIcon() {
-  return (
-    <Squircle id="map" gradient={["#e9f1df", "#cfe6c5"]}>
-      {/* water corner */}
-      <path d="M66 90 L90 90 L90 62 Z" fill="#a9d8ef" />
-      {/* roads */}
-      <path d="M18 40 Q46 30 92 52" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
-      <path d="M34 92 Q40 56 70 20" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
-      <path d="M18 40 Q46 30 92 52" fill="none" stroke="#e2b34d" strokeWidth="2.5" strokeLinecap="round" />
-      {/* location pin */}
-      <g transform="translate(50 44)">
-        <path d="M0 -16 C9 -16 15 -9 15 -1 C15 9 4 16 0 24 C-4 16 -15 9 -15 -1 C-15 -9 -9 -16 0 -16 Z" fill="#ff3b30" />
-        <circle cx="0" cy="-1" r="5.5" fill="#fff" />
-      </g>
-    </Squircle>
-  );
+  return <AppIconImg src={mapsIcon} alt="Maps" />;
 }
 
 /** Trash — real macOS-style metallic bin bitmap (aakash icon set). */
@@ -155,29 +129,14 @@ export function TrashIcon() {
   return <AppIconImg src={trashIcon} alt="Trash" />;
 }
 
-/** Lineup — green pitch squircle with a football. */
+/** FootMob (Lineup) — real FotMob macOS icon (bitmap, macosicons.com). */
 export function LineupIcon() {
-  return (
-    <Squircle id="xi" gradient={["#2fa552", "#1b7a38"]}>
-      <rect x="24" y="24" width="52" height="52" rx="4" fill="none" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" />
-      <line x1="24" y1="50" x2="76" y2="50" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" />
-      <circle cx="50" cy="50" r="10" fill="none" stroke="#fff" strokeOpacity="0.5" strokeWidth="2" />
-      <circle cx="50" cy="50" r="7" fill="#fff" />
-      <path d="M50 46 l3.3 2.4 -1.3 3.9 h-4 l-1.3 -3.9 z" fill="#1b7a38" />
-    </Squircle>
-  );
+  return <AppIconImg src={footmobIcon} alt="FootMob" />;
 }
 
+/** GitHub — real macOS-style GitHub icon (bitmap, macosicons.com). */
 export function GithubIcon() {
-  return (
-    <Squircle id="gh" gradient={["#3d4450", "#15181e"]}>
-      <path
-        transform="translate(27 27) scale(1.92)"
-        fill="#fff"
-        d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"
-      />
-    </Squircle>
-  );
+  return <AppIconImg src={githubIcon} alt="GitHub" />;
 }
 
 export function LinkedinIcon() {
