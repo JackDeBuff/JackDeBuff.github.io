@@ -102,7 +102,8 @@ function CatSVG({ mode }: { mode: Mode }) {
   const dark = "#d99450";
   const sleeping = mode === "sleep";
   return (
-    <svg width="52" height="46" viewBox="0 0 52 46" fill="none">
+    // overflow-visible: the tail sways past the right edge of the viewBox
+    <svg width="52" height="46" viewBox="0 0 52 46" fill="none" className="overflow-visible">
       {/* tail */}
       <path
         className="salmon-tail"
