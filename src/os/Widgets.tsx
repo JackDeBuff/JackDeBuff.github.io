@@ -10,9 +10,9 @@ import { LineupIcon } from "../icons/AppIcons";
 
 const fmtWeekday = new Intl.DateTimeFormat("en-US", { weekday: "long" });
 
-/* Adaptive glass card (calendar, batteries); FootMob and Weather keep brand looks */
-const GLASS =
-  "rounded-[22px] bg-white/75 text-zinc-800 shadow-lg ring-1 ring-black/10 backdrop-blur-xl dark:bg-zinc-900/70 dark:text-zinc-100 dark:ring-white/10";
+/* Real liquid glass (adapts light/dark via .light overrides in index.css);
+   only Weather keeps an opaque iOS-blue card look */
+const GLASS = "liquid-glass rounded-[22px] text-zinc-800 dark:text-zinc-100";
 
 /* Tiny circular flags — SVG so they render everywhere (England's emoji flag doesn't) */
 function Flag({ code }: { code: "FRA" | "ENG" | "ESP" | "ARG" }) {
@@ -52,7 +52,7 @@ function Flag({ code }: { code: "FRA" | "ENG" | "ESP" | "ARG" }) {
           </>
         )}
       </g>
-      <circle cx="18" cy="18" r="17" fill="none" strokeWidth="1.2" className="stroke-white/25" />
+      <circle cx="18" cy="18" r="17" fill="none" strokeWidth="1.2" className="stroke-black/10 dark:stroke-white/25" />
     </svg>
   );
 }
@@ -113,11 +113,7 @@ export default function Widgets() {
   return (
     <div className="absolute left-5 top-11 hidden w-[368px] grid-cols-2 gap-4 lg:grid" aria-label="Desktop widgets">
       {/* FootMob — Following (opens the app) */}
-      <button
-        onClick={() => openWindow("lineup")}
-        className="rounded-[22px] bg-black p-3 text-left text-white shadow-lg ring-1 ring-white/10"
-        aria-label="FootMob widget"
-      >
+      <button onClick={() => openWindow("lineup")} className={`${GLASS} p-3 text-left`} aria-label="FootMob widget">
         <div className="flex items-center justify-between px-1">
           <span className="flex items-center gap-1.5 text-[13px] font-bold">
             <span aria-hidden>★</span> Following
@@ -127,13 +123,13 @@ export default function Widgets() {
           </span>
         </div>
         {MATCHES.map((m, i) => (
-          <div key={m.when} className={`flex items-center justify-between px-1 py-2.5 ${i > 0 ? "border-t border-white/10" : "mt-1"}`}>
+          <div key={m.when} className={`flex items-center justify-between px-1 py-2.5 ${i > 0 ? "border-t border-black/10 dark:border-white/10" : "mt-1"}`}>
             <div className="flex flex-col items-center gap-0.5">
               <Flag code={m.home} />
               <span className="text-[10px] font-bold">{m.home}</span>
             </div>
             <div className="text-center">
-              <div className="text-[9px] uppercase tracking-wide text-zinc-400">World Cup</div>
+              <div className="text-[9px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">World Cup</div>
               <div className="text-[12px] font-semibold">{m.when}</div>
             </div>
             <div className="flex flex-col items-center gap-0.5">
@@ -152,7 +148,7 @@ export default function Widgets() {
       </div>
 
       {/* Weather — Durham, NC (Jack's side of the world) */}
-      <div className="col-span-2 rounded-[22px] bg-gradient-to-b from-sky-700 via-sky-800 to-slate-900 p-4 text-white shadow-lg ring-1 ring-white/10">
+      <div className="col-span-2 rounded-[22px] bg-gradient-to-b from-[#66abdd]/95 to-[#4a80bd]/95 p-4 text-white shadow-lg ring-1 ring-white/20 backdrop-blur-xl">
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-1 text-[13px] font-semibold">Durham, NC <span aria-hidden>➤</span></div>
@@ -164,7 +160,7 @@ export default function Widgets() {
             <div className="text-[12px] text-white/70">H:33° L:22°</div>
           </div>
         </div>
-        <div className="mt-3 flex justify-between border-t border-white/15 pt-2.5">
+        <div className="mt-4 flex justify-between">
           {HOURLY_TEMPS.map((t, i) => {
             const h = (now.getHours() + i + 1) % 24;
             return (
