@@ -97,7 +97,7 @@ export default function Terminal() {
 
   // `secret` is intentionally left out of help — but stays tab-completable as a breadcrumb.
   const COMMANDS = ["ls", "cd", "cat", "pwd", "open", "clear", "help", "whoami", "date", "echo", "neofetch", "story", "git", "salmon", "secret"];
-  const APPS = ["about", "safari", "chrome", "music", "photos", "stocks", "maps", "lineup", "trash", "settings", "terminal", "github", "linkedin"];
+  const APPS = ["about", "safari", "chrome", "music", "photos", "stocks", "maps", "lineup", "messages", "trash", "settings", "terminal", "github", "linkedin"];
 
   /** Tab-completion: first word → commands; `open` → app names; otherwise → entries in cwd. */
   function complete(raw: string): string | null {
@@ -197,7 +197,7 @@ export default function Terminal() {
         if (app === "github") window.open(profile.github, "_blank", "noopener");
         else if (app === "linkedin") window.open(profile.linkedin, "_blank", "noopener");
         else if (app === "safari") openWindow("chrome"); // Safari app keeps the legacy id
-        else if (["about", "chrome", "music", "photos", "stocks", "maps", "lineup", "trash", "settings", "terminal"].includes(app)) openWindow(app);
+        else if (["about", "chrome", "music", "photos", "stocks", "maps", "lineup", "messages", "trash", "settings", "terminal"].includes(app)) openWindow(app);
         else print(`open: unknown app: ${args[0] ?? ""}`);
         break;
       }

@@ -12,6 +12,7 @@ import {
   MapsIcon,
   TrashIcon,
   LineupIcon,
+  MessagesIcon,
 } from "../icons/AppIcons";
 import Notes from "./Notes";
 import Chrome from "./Chrome";
@@ -23,6 +24,7 @@ import Stocks from "./Stocks";
 import Maps from "./Maps";
 import Trash from "./Trash";
 import Lineup from "./Lineup";
+import Messages from "./Messages";
 import { profile } from "../data/profile";
 
 export interface AppDef {
@@ -110,6 +112,16 @@ export const apps: AppDef[] = [
     component: Lineup,
     defaultSize: { width: 560, height: 640 },
     defaultPosition: { x: 300, y: 70 },
+  },
+  {
+    id: "messages",
+    title: "Messages",
+    icon: <MessagesIcon />,
+    dock: false,
+    desktop: true,
+    component: Messages,
+    defaultSize: { width: 820, height: 580 },
+    defaultPosition: { x: 220, y: 90 },
   },
   {
     id: "trash",

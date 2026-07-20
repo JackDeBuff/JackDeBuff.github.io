@@ -9,6 +9,7 @@ import stocksIcon from "./app-icons/stocks.webp";
 import mapsIcon from "./app-icons/maps.webp";
 import githubIcon from "./app-icons/github.webp";
 import footmobIcon from "./app-icons/footmob.webp";
+import messagesIcon from "./app-icons/messages.webp";
 
 /**
  * App icons: real macOS-style icon images (downscaled WebP, adapted from the
@@ -137,6 +138,10 @@ export function LineupIcon() {
 /** GitHub — real macOS-style GitHub icon (bitmap, macosicons.com). */
 export function GithubIcon() {
   return <AppIconImg src={githubIcon} alt="GitHub" />;
+}
+
+export function MessagesIcon() {
+  return <AppIconImg src={messagesIcon} alt="Messages" />;
 }
 
 export function LinkedinIcon() {

@@ -512,6 +512,13 @@ body {
   100% { transform: scale(1); opacity: 1; }
 }
 .salmon-pop { animation: salmon-pop 0.22s var(--ease-out-quint) both; }
+
+/* Messages: new bubble lands with a small iMessage-ish rise (transform/opacity only) */
+@keyframes msg-pop {
+  0% { transform: translateY(6px) scale(0.96); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.msg-pop { animation: msg-pop 0.2s var(--ease-out-quint) both; }
 @media (prefers-reduced-motion: no-preference) {
   .salmon-walk { animation: salmon-bob 0.45s ease-in-out infinite; }
   .salmon-tail { animation: salmon-sway 2.6s ease-in-out infinite; transform-box: fill-box; }
