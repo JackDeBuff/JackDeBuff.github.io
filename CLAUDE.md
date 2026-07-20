@@ -12,7 +12,7 @@ Vite + React 18 + TypeScript + Tailwind (dark mode = `dark` class; `light` class
 
 ## Git / auth
 
-No `gh` CLI. Push works via macOS keychain (`git push origin main`). Token if needed: `security find-internet-password -s github.com -g` (repo+workflow scope). Commit as Supawich Puengdang <supawich@gmail.com>.
+`gh` CLI is installed and authenticated as JackDeBuff (keyring; scopes `gist, read:org, repo, workflow`). Use it to check deploys — `gh run list` / `gh run watch` — instead of polling the live site with curl. Push still goes through the macOS keychain (`git push origin main`); token if needed: `security find-internet-password -s github.com -g`. Commit as Supawich Puengdang <supawich@gmail.com>.
 
 ## Where things live
 
